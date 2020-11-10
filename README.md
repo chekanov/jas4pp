@@ -1,6 +1,7 @@
 # Jas4PP. Java Analysis Studio for Particle Physics
 
-This is a main repository for Jas4pp. To compile the project you need Java 8+ and ANT and MAVEN2
+This is the main repository for Jas4pp. To compile Java source code,
+you need Java 8+ and ANT and MAVEN2 tools installed (check "ant" and "mvn" commands). 
 
 
 S.Chekanov
