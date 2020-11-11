@@ -1,0 +1,10 @@
+Change: ./core/src/main/filtered-resources/org/freehep/jas/JAS3.properties
+
+Startup properties:
+
+base/freehep-application/target/classes/org/freehep/application/Default.properties
+(freehep)
+
+Splash screen:
+base/freehep-application/src/main/resources/org/freehep/application/lg-freehep.gif
+

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE aida SYSTEM "http://aida.freehep.org/schemas/3.3/aida.dtd">
+<aida version="3.3">
+  <implementation version="1.1" package="FreeHEP"/>
+  <profile1d name="p1" path="/" title="Test Profile 1d">
+    <annotation>
+      <item key="Title" value="Test Profile 1d" sticky="true"/>
+      <item key="AidaPath" value="/p1" sticky="true"/>
+      <item key="FullPath" value="/testProfile.aida/p1"
+        sticky="true"/>
+    </annotation>
+    <axis max="5.000000000000001" numberOfBins="36" min="-4.3"
+      direction="x"/>
+    <statistics entries="100">
+      <statistic mean="-0.002107283430752941" direction="x"
+        rms="1.0080106763397223"/>
+    </statistics>
+    <data1d>
+      <bin1d entries="1" height="-1.8181983116822478"
+        weightedMean="-2.5970568940039818" error="1.8181983116822478" binNum="6" rms="0.0"/>
+      <bin1d entries="1" height="-0.8675937914632068"
+        weightedMean="-2.1377599930854534" error="0.8675937914632068" binNum="8" rms="0.0"/>
+      <bin1d entries="2" height="-0.2434792537916552"
+        weightedMean="-1.8738648016209951" error="0.1217396268958276" binNum="9"
+        rms="0.5634484526822027"/>
+      <bin1d entries="9" height="0.009543935599401551"
+        weightedMean="-1.3261574674600562" error="0.0010604372888223946" binNum="11"
+        rms="1.1869508359263548"/>
+      <bin1d entries="5" height="-0.3129582080112228"
+        weightedMean="-1.107761620959873" error="0.06259164160224456" binNum="12"
+        rms="0.7768265793510607"/>
+      <bin1d entries="11" height="-0.13033382188313264"
+        weightedMean="-0.8192935279038456" error="0.011848529262102968" binNum="13"
+        rms="0.9444056072971341"/>
+      <bin1d entries="5" height="0.4394482380881891"
+        weightedMean="-0.5216238088241312" error="0.08788964761763782" binNum="14"
+        rms="0.5869349025997225"/>
+      <bin1d entries="10" height="0.5217476130201485"
+        weightedMean="-0.2636356075552874" error="0.05217476130201485" binNum="15"
+        rms="0.6620389014433108"/>
+      <bin1d entries="11" height="0.16266974111864815"
+        weightedMean="-0.0775250171417363" error="0.014788158283513469" binNum="16"
+        rms="0.9183804993908441"/>
+      <bin1d entries="12" height="0.557456930015419"
+        weightedMean="0.2627782692379563" error="0.04645474416795158" binNum="17"
+        rms="1.0769340410700052"/>
+      <bin1d entries="5" height="0.494883190457994"
+        weightedMean="0.5219719077646069" error="0.0989766380915988" binNum="18"
+        rms="1.0137536578010817"/>
+      <bin1d entries="7" height="-0.0811074067425521"
+        weightedMean="0.715998394466309" error="0.011586772391793157" binNum="19"
+        rms="0.7473770039271319"/>
+      <bin1d entries="3" height="0.20201603212686656"
+        weightedMean="0.9612698432899505" error="0.06733867737562219" binNum="20"
+        rms="1.115765461074794"/>
+      <bin1d entries="9" height="-0.7139945826043211"
+        weightedMean="1.2525814241646218" error="0.07933273140048012" binNum="21"
+        rms="0.5750470572529516"/>
+      <bin1d entries="3" height="0.8356051462182629"
+        weightedMean="1.4948661688653744" error="0.278535048739421" binNum="22"
+        rms="0.47375460934643354"/>
+      <bin1d entries="3" height="-0.20575763392791127"
+        weightedMean="1.7262747811182984" error="0.06858587797597042" binNum="23"
+        rms="0.7233515721623502"/>
+      <bin1d entries="3" height="-0.8329361687360373"
+        weightedMean="2.086623282041932" error="0.27764538957867907" binNum="24"
+        rms="0.9715466699735038"/>
+    </data1d>
+  </profile1d>
+  <profile2d name="p2" path="/" title="Test Profile 2d">
+    <annotation>
+      <item key="Title" value="Test Profile 2d" sticky="true"/>
+      <item key="AidaPath" value="/p2" sticky="true"/>
+      <item key="FullPath" value="/testProfile.aida/p2"
+        sticky="true"/>
+    </annotation>
+    <axis max="5.000000000000001" numberOfBins="36" min="-4.3"
+      direction="x"/>
+    <axis max="1.0" numberOfBins="3" min="-1.0" direction="y"/>
+    <statistics entries="100">
+      <statistic mean="-0.002107283430752941" direction="x"
+        rms="1.0080106763397223"/>
+      <statistic mean="0.511256668197569" direction="y"
+        rms="0.2934721312037485"/>
+    </statistics>
+    <data2d>
+      <bin2d entries="1" height="-1.8181983116822478"
+        error="1.8181983116822478" binNumY="2" weightedMeanY="0.9811977584650986"
+        binNumX="6" weightedMeanX="-2.5970568940039818" rms="0.0"/>
+      <bin2d entries="1" height="-0.8675937914632068"
+        error="0.8675937914632068" binNumY="2" weightedMeanY="0.8661519582127125"
+        binNumX="8" weightedMeanX="-2.1377599930854534" rms="0.0"/>
+      <bin2d entries="1" height="-0.8069277064738579"
+        error="0.8069277064738579" binNumY="1" weightedMeanY="0.3153743401507666"
+        binNumX="9" weightedMeanX="-1.9657514037057382" rms="0.0"/>
+      <bin2d entries="1" height="0.31996919889054753"
+        error="0.31996919889054753" binNumY="2" weightedMeanY="0.3634574775001652"
+        binNumX="9" weightedMeanX="-1.7819781995362522" rms="0.0"/>
+      <bin2d entries="4" height="0.19575302805172062"
+        error="0.048938257012930156" binNumY="1" weightedMeanY="0.0926345336930453"
+        binNumX="11" weightedMeanX="-1.297948951081647"
+        rms="1.4778086406983282"/>
+      <bin2d entries="5" height="-0.13942333836245374"
+        error="0.02788466767249075" binNumY="2" weightedMeanY="0.6959780222754997"
+        binNumX="11" weightedMeanX="-1.3487242805627835"
+        rms="0.8595749554355447"/>
+      <bin2d entries="1" height="-0.19148203629405983"
+        error="0.19148203629405983" binNumY="1" weightedMeanY="0.2710766096502897"
+        binNumX="12" weightedMeanX="-1.0931890142086558" rms="0.0"/>
+      <bin2d entries="4" height="-0.34332725094051353"
+        error="0.08583181273512838" binNumY="2" weightedMeanY="0.5259172617031809"
+        binNumX="12" weightedMeanX="-1.1114047726476772"
+        rms="0.8658597023424938"/>
+      <bin2d entries="5" height="0.052185632536188555"
+        error="0.010437126507237712" binNumY="1" weightedMeanY="0.05911807943503582"
+        binNumX="13" weightedMeanX="-0.8286697486284564"
+        rms="0.819476408208957"/>
+      <bin2d entries="6" height="-0.2824333672325669"
+        error="0.04707222787209448" binNumY="2" weightedMeanY="0.760720775771906"
+        binNumX="13" weightedMeanX="-0.8114800106333364"
+        rms="1.0122451249245437"/>
+      <bin2d entries="1" height="1.196327226508923"
+        error="1.196327226508923" binNumY="1" weightedMeanY="0.3137247888109179"
+        binNumX="14" weightedMeanX="-0.4751587923488507" rms="0.0"/>
+      <bin2d entries="4" height="0.25022849098300565"
+        error="0.06255712274575141" binNumY="2" weightedMeanY="0.6666044490680241"
+        binNumX="14" weightedMeanX="-0.5332400629429513"
+        rms="0.5015926249352497"/>
+      <bin2d entries="3" height="0.09708162851589351"
+        error="0.03236054283863117" binNumY="1" weightedMeanY="0.18621730987858665"
+        binNumX="15" weightedMeanX="-0.26298970891754997"
+        rms="0.20425155643925016"/>
+      <bin2d entries="7" height="0.7037473206648291"
+        error="0.10053533152354702" binNumY="2" weightedMeanY="0.6583046523105954"
+        binNumX="15" weightedMeanX="-0.2639124212571749"
+        rms="0.7055806246383125"/>
+      <bin2d entries="3" height="0.09034783272518025"
+        error="0.030115944241726752" binNumY="1" weightedMeanY="0.16484713672053997"
+        binNumX="16" weightedMeanX="-0.0868403417007741"
+        rms="1.0764318443747558"/>
+      <bin2d entries="8" height="0.1897904567661986"
+        error="0.023723807095774825" binNumY="2" weightedMeanY="0.653778028279713"
+        binNumX="16" weightedMeanX="-0.07403177043209713"
+        rms="0.8499969095888024"/>
+      <bin2d entries="5" height="0.1465008826999324"
+        error="0.029300176539986476" binNumY="1" weightedMeanY="0.16254858254240276"
+        binNumX="17" weightedMeanX="0.2605947098084722"
+        rms="1.1601417430219554"/>
+      <bin2d entries="7" height="0.8509969638121951"
+        error="0.1215709948303136" binNumY="2" weightedMeanY="0.6794399358687703"
+        binNumX="17" weightedMeanX="0.2643379545447306"
+        rms="0.9055554098419871"/>
+      <bin2d entries="5" height="0.494883190457994"
+        error="0.0989766380915988" binNumY="2" weightedMeanY="0.6265108067284396"
+        binNumX="18" weightedMeanX="0.5219719077646069"
+        rms="1.0137536578010817"/>
+      <bin2d entries="2" height="0.0743445634160334"
+        error="0.0371722817080167" binNumY="1" weightedMeanY="0.16770170483677183"
+        binNumX="19" weightedMeanX="0.7555408073289108"
+        rms="0.9142491064370352"/>
+      <bin2d entries="5" height="-0.14328819480598626"
+        error="0.028657638961197253" binNumY="2" weightedMeanY="0.7003014078693846"
+        binNumX="19" weightedMeanX="0.7001814293212683"
+        rms="0.6588840509040294"/>
+      <bin2d entries="1" height="-0.8308787765237536"
+        error="0.8308787765237536" binNumY="1" weightedMeanY="0.16416901973608866"
+        binNumX="20" weightedMeanX="0.9068843562887332" rms="0.0"/>
+      <bin2d entries="2" height="0.7184634364521766"
+        error="0.3592317182260883" binNumY="2" weightedMeanY="0.8579355376712787"
+        binNumX="20" weightedMeanX="0.988462586790559"
+        rms="1.033075545102158"/>
+      <bin2d entries="3" height="-0.9972450580751993"
+        error="0.33241501935839973" binNumY="1" weightedMeanY="0.15770365293759933"
+        binNumX="21" weightedMeanX="1.2005834191370612"
+        rms="0.6281577235218393"/>
+      <bin2d entries="6" height="-0.5723693448688819"
+        error="0.09539489081148032" binNumY="2" weightedMeanY="0.6237329465978846"
+        binNumX="21" weightedMeanX="1.2785804266784018"
+        rms="0.4884204033227836"/>
+      <bin2d entries="1" height="1.4859459766767817"
+        error="1.4859459766767817" binNumY="1" weightedMeanY="0.20120281818662633"
+        binNumX="22" weightedMeanX="1.5483984243353006" rms="0.0"/>
+      <bin2d entries="2" height="0.5104347309890034"
+        error="0.2552173654945017" binNumY="2" weightedMeanY="0.4229814311273299"
+        binNumX="22" weightedMeanX="1.4681000411304117"
+        rms="0.13949103194965873"/>
+      <bin2d entries="3" height="-0.20575763392791127"
+        error="0.06858587797597042" binNumY="2" weightedMeanY="0.7227122322588796"
+        binNumX="23" weightedMeanX="1.7262747811182984"
+        rms="0.7233515721623502"/>
+      <bin2d entries="3" height="-0.8329361687360373"
+        error="0.27764538957867907" binNumY="2" weightedMeanY="0.5978551855212767"
+        binNumX="24" weightedMeanX="2.086623282041932"
+        rms="0.9715466699735038"/>
+    </data2d>
+  </profile2d>
+</aida>

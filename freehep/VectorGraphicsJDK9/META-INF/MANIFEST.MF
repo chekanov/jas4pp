@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.2
+Created-By: 1.7.0_55-b13 (Oracle Corporation)
+Built-By: S.Chekanov
+Main-Class: pylearn.Main
+Built-Date: 20150226
+Version: 1.1
+Class-Path: 
+

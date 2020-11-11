@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE aida SYSTEM "http://aida.freehep.org/schemas/3.3/aida.dtd">
+<aida version="3.3">
+  <implementation version="1.1" package="FreeHEP"/>
+  <cloud1d name="cloud1DWithTitle" conversionBins="50"
+    maxEntries="100000" path="/clouds/" title="cloud1D title">
+    <annotation>
+      <item key="Title" value="cloud1D title" sticky="true"/>
+      <item key="AidaPath" value="/clouds/cloud1DWithTitle"
+        sticky="true"/>
+      <item key="FullPath"
+        value="/testPathNameTitleConvention.aida/clouds/cloud1DWithTitle" sticky="true"/>
+    </annotation>
+    <entries1d>
+    </entries1d>
+  </cloud1d>
+  <cloud1d name="cloud1DWithoutTitle" conversionBins="50"
+    maxEntries="100000" path="/clouds/" title="cloud1DWithoutTitle">
+    <annotation>
+      <item key="Title" value="cloud1DWithoutTitle"
+        sticky="true"/>
+      <item key="AidaPath" value="/clouds/cloud1DWithoutTitle"
+        sticky="true"/>
+      <item key="FullPath"
+        value="/testPathNameTitleConvention.aida/clouds/cloud1DWithoutTitle" sticky="true"/>
+    </annotation>
+    <entries1d>
+    </entries1d>
+  </cloud1d>
+  <cloud2d name="cloud2DWithTitle" conversionUpperEdgeY="1.1"
+    maxEntries="100000" conversionUpperEdgeX="1.1" conversionLowerEdgeY="-1.1"
+    conversionLowerEdgeX="-1.1" title="cloud2D title" conversionBinsY="50"
+    conversionBinsX="50" path="/clouds/">
+    <annotation>
+      <item sticky="true" value="cloud2D title" key="Title"/>
+      <item sticky="true" value="/clouds/cloud2DWithTitle"
+        key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/clouds/cloud2DWithTitle" key="FullPath"/>
+    </annotation>
+    <entries2d>
+    </entries2d>
+  </cloud2d>
+  <cloud2d name="cloud2DWithoutTitle"
+    conversionUpperEdgeY="1.1" conversionUpperEdgeX="1.1" maxEntries="100000"
+    conversionLowerEdgeY="-1.1" conversionLowerEdgeX="-1.1" conversionBinsY="50"
+    title="cloud2DWithoutTitle" conversionBinsX="50" path="/clouds/">
+    <annotation>
+      <item sticky="true" value="cloud2DWithoutTitle"
+        key="Title"/>
+      <item sticky="true" value="/clouds/cloud2DWithoutTitle"
+        key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/clouds/cloud2DWithoutTitle" key="FullPath"/>
+    </annotation>
+    <entries2d>
+    </entries2d>
+  </cloud2d>
+  <cloud3d name="cloud3DWithTitle" maxEntries="100000"
+    conversionBinsZ="50" conversionBinsY="50" title="cloud3D title"
+    conversionBinsX="50" path="/clouds/">
+    <annotation>
+      <item sticky="true" value="cloud3D title" key="Title"/>
+      <item sticky="true" value="/clouds/cloud3DWithTitle"
+        key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/clouds/cloud3DWithTitle" key="FullPath"/>
+    </annotation>
+    <entries3d>
+    </entries3d>
+  </cloud3d>
+  <cloud3d name="cloud3DWithoutTitle" maxEntries="100000"
+    conversionBinsZ="50" conversionBinsY="50" title="cloud3DWithoutTitle"
+    conversionBinsX="50" path="/clouds/">
+    <annotation>
+      <item sticky="true" value="cloud3DWithoutTitle"
+        key="Title"/>
+      <item sticky="true" value="/clouds/cloud3DWithoutTitle"
+        key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/clouds/cloud3DWithoutTitle" key="FullPath"/>
+    </annotation>
+    <entries3d>
+    </entries3d>
+  </cloud3d>
+  <dataPointSet name="dpsWithTitle" dimension="12"
+    title="dps Title" path="/dataPointSets/">
+    <annotation>
+      <item sticky="true" value="dps Title" key="Title"/>
+      <item sticky="true" value="/dataPointSets/dpsWithTitle"
+        key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/dataPointSets/dpsWithTitle" key="FullPath"/>
+    </annotation>
+  </dataPointSet>
+  <dataPointSet name="dpsWithoutTitle" dimension="1"
+    title="dpsWithoutTitle" path="/dataPointSets/">
+    <annotation>
+      <item sticky="true" value="dpsWithoutTitle" key="Title"/>
+      <item sticky="true"
+        value="/dataPointSets/dpsWithoutTitle" key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/dataPointSets/dpsWithoutTitle" key="FullPath"/>
+    </annotation>
+  </dataPointSet>
+  <function name="gauss" isNormalized="false" title="g"
+    path="/functions/">
+    <codelet>
+      codelet:g:catalog</codelet>
+    <arguments>
+      <argument name="x0">
+        <range min="-Infinity" max="Infinity"/>
+      </argument>
+    </arguments>
+    <parameters>
+      <parameter name="amplitude" value="1.0"/>
+      <parameter name="mean" value="0.0"/>
+      <parameter name="sigma" value="1.0"/>
+    </parameters>
+  </function>
+  <histogram1d name="hist1DWithTitle" title="hist1D title"
+    path="/histograms/">
+    <annotation>
+      <item sticky="true" value="hist1D title" key="Title"/>
+      <item sticky="true" value="/histograms/hist1DWithTitle"
+        key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/histograms/hist1DWithTitle" key="FullPath"/>
+    </annotation>
+    <axis numberOfBins="10" min="0.0" max="10.0" direction="x"/>
+    <statistics entries="0">
+      <statistic direction="x" rms="0.0" mean="0.0"/>
+    </statistics>
+    <data1d>
+    </data1d>
+  </histogram1d>
+  <histogram1d name="hist1DWithoutTitle"
+    title="hist1DWithoutTitle" path="/histograms/">
+    <annotation>
+      <item sticky="true" value="hist1DWithoutTitle"
+        key="Title"/>
+      <item sticky="true"
+        value="/histograms/hist1DWithoutTitle" key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/histograms/hist1DWithoutTitle" key="FullPath"/>
+    </annotation>
+    <axis numberOfBins="10" min="0.0" max="10.0" direction="x"/>
+    <statistics entries="0">
+      <statistic direction="x" rms="0.0" mean="0.0"/>
+    </statistics>
+    <data1d>
+    </data1d>
+  </histogram1d>
+  <histogram2d name="hist2DWithTitle" title="hist2D title"
+    path="/histograms/">
+    <annotation>
+      <item sticky="true" value="hist2D title" key="Title"/>
+      <item sticky="true" value="/histograms/hist2DWithTitle"
+        key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/histograms/hist2DWithTitle" key="FullPath"/>
+    </annotation>
+    <axis numberOfBins="10" min="0.0" max="10.0" direction="x"/>
+    <axis numberOfBins="10" min="0.0" max="10.0" direction="y"/>
+    <statistics entries="0">
+      <statistic direction="x" rms="0.0" mean="0.0"/>
+      <statistic direction="y" rms="0.0" mean="0.0"/>
+    </statistics>
+    <data2d>
+    </data2d>
+  </histogram2d>
+  <histogram2d name="hist2DWithoutTitle"
+    title="hist2DWithoutTitle" path="/histograms/">
+    <annotation>
+      <item sticky="true" value="hist2DWithoutTitle"
+        key="Title"/>
+      <item sticky="true"
+        value="/histograms/hist2DWithoutTitle" key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/histograms/hist2DWithoutTitle" key="FullPath"/>
+    </annotation>
+    <axis numberOfBins="10" min="0.0" max="10.0" direction="x"/>
+    <axis numberOfBins="10" min="0.0" max="10.0" direction="y"/>
+    <statistics entries="0">
+      <statistic direction="x" rms="0.0" mean="0.0"/>
+      <statistic direction="y" rms="0.0" mean="0.0"/>
+    </statistics>
+    <data2d>
+    </data2d>
+  </histogram2d>
+  <histogram3d name="hist3DWithTitle" title="hist3D title"
+    path="/histograms/">
+    <annotation>
+      <item sticky="true" value="hist3D title" key="Title"/>
+      <item sticky="true" value="/histograms/hist3DWithTitle"
+        key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/histograms/hist3DWithTitle" key="FullPath"/>
+    </annotation>
+    <axis numberOfBins="10" min="0.0" max="10.0" direction="x"/>
+    <axis numberOfBins="10" min="0.0" max="10.0" direction="y"/>
+    <axis numberOfBins="10" min="0.0" max="10.0" direction="z"/>
+    <statistics entries="0">
+      <statistic direction="x" rms="0.0" mean="0.0"/>
+      <statistic direction="y" rms="0.0" mean="0.0"/>
+      <statistic direction="z" rms="0.0" mean="0.0"/>
+    </statistics>
+    <data3d>
+    </data3d>
+  </histogram3d>
+  <histogram3d name="hist3DWithoutTitle"
+    title="hist3DWithoutTitle" path="/histograms/">
+    <annotation>
+      <item sticky="true" value="hist3DWithoutTitle"
+        key="Title"/>
+      <item sticky="true"
+        value="/histograms/hist3DWithoutTitle" key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/histograms/hist3DWithoutTitle" key="FullPath"/>
+    </annotation>
+    <axis numberOfBins="10" min="0.0" max="10.0" direction="x"/>
+    <axis numberOfBins="10" min="0.0" max="10.0" direction="y"/>
+    <axis numberOfBins="10" min="0.0" max="10.0" direction="z"/>
+    <statistics entries="0">
+      <statistic direction="x" rms="0.0" mean="0.0"/>
+      <statistic direction="y" rms="0.0" mean="0.0"/>
+      <statistic direction="z" rms="0.0" mean="0.0"/>
+    </statistics>
+    <data3d>
+    </data3d>
+  </histogram3d>
+  <tuple name="tupleWithTitle" title="tuple Title"
+    path="/tuples/">
+    <annotation>
+      <item sticky="true" value="" key="Title"/>
+      <item sticky="true" value="/tuples/tupleWithTitle"
+        key="AidaPath"/>
+      <item sticky="true"
+        value="/testPathNameTitleConvention.aida/tuples/tupleWithTitle" key="FullPath"/>
+    </annotation>
+    <columns>
+      <column name="x" type="double"/>
+    </columns>
+    <rows>
+    </rows>
+  </tuple>
+</aida>

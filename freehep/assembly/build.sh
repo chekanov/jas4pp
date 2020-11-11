@@ -1,0 +1,33 @@
+#!/bin/bash
+echo "Maven build file. S.Chekanov" 
+M2_OUT="../../OUTPUT/extensions/"
+echo "Output=$M2_OUT"
+
+# files to copy to the final repository
+declare -a arr=( "freehep-jaida-*" "freehep-jaida-jminuit-*" "freehep-jaida-remote-*" "freehep-jaida-xml-*" "freehep-jaida-root-*" )
+
+PWD=`pwd`
+export M2_REPO=$PWD
+parentdir="$(dirname "$(pwd)")" 
+parentdir="$(dirname $parentdir)"
+export M2_REP=$parentdir/REPO/
+echo "use repository=$M2_REP"
+#mvn --batch-mode release:update-versions -DdevelopmentVersion=50.0 -Dmaven.repo.local=$M2_REP -Dmaven.test.skip=true 
+# mvn -U clean -Dmaven.repo.local=$M2_REP -Dmaven.test.skip=true
+
+mvn -U clean install -Dmaven.repo.local=$M2_REP -Dmaven.test.skip=true 
+#mvn versions:set -DnewVersion=4.0.0 -Dmaven.repo.local=$M2_REP
+#mvn versions:commit              -Dmaven.repo.local=$M2_REP 
+#mvn ant:ant -Dmaven.repo.local=$M2_REP
+echo "Repository=$M2_REP"
+
+
+for i in "${arr[@]}"
+do
+  echo "Replacing $i"
+  rm -f $M2_OUT/$i
+  find $PWD -type f -name $i -exec cp -fv {} $M2_OUT/ \;
+done
+
+
+

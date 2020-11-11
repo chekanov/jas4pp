@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE aida SYSTEM "http://aida.freehep.org/schemas/3.3/aida.dtd">
+<aida version="3.3">
+  <implementation version="1.1" package="FreeHEP"/>
+  <tuple
+    options="These= are; options = for; the, first= tuple" name="myTupleName" path="/" title="mytupleTitle">
+    <annotation>
+      <item key="Title" value="" sticky="true"/>
+      <item key="AidaPath" value="/myTupleName" sticky="true"/>
+      <item key="FullPath" value="/testTuple.aida/myTupleName"
+        sticky="true"/>
+    </annotation>
+    <columns>
+      <column name="col1_Int=1" type="int"/>
+      <column name="col2_Short=2" type="short"/>
+      <column name="col3_Long=5" type="long"/>
+      <column name="col4_Float=0.3" type="float"/>
+      <column name="col5_Double=-0.5" type="double"/>
+      <column name="col6_Boolean=true" type="boolean"/>
+      <column name="col7_Byte=23" type="byte"/>
+      <column name="col8_Character=f" type="char"/>
+      <column name="col9_String=de" type="string"/>
+      <column name="col10_Object" type="java.lang.Object"/>
+      <column name="col11_ITuple " type="ITuple">
+        <columns>
+          <column name="px=.2" type="double"/>
+          <column name="py=3." type="double"/>
+          <column name="pz=0." type="double"/>
+          <column name="xyz " type="ITuple">
+            <columns>
+              <column name="x" type="int"/>
+              <column name="y" type="int"/>
+              <column name="z" type="int"/>
+            </columns>
+          </column>
+          <column name="ipx" type="float"/>
+          <column name="ipy" type="float"/>
+          <column name="ipz" type="float"/>
+          <column name="track=-1" type="int"/>
+        </columns>
+      </column>
+    </columns>
+    <rows>
+      <row>
+        <entry value="13"/>
+        <entry value="18"/>
+        <entry value="4506086738629198644"/>
+        <entry value="0.05888897"/>
+        <entry value="0.8036714883754978"/>
+        <entry value="false"/>
+        <entry value="119"/>
+        <entry value="w"/>
+        <entry value="p8"/>
+        <entry value="p8"/>
+        <entryITuple>
+          <row>
+            <entry value="0.8279759390575473"/>
+            <entry value="0.37108614186143085"/>
+            <entry value="0.3148069964026564"/>
+            <entryITuple>
+              <row>
+                <entry value="28"/>
+                <entry value="134"/>
+                <entry value="28"/>
+              </row>
+            </entryITuple>
+            <entry value="0.560184"/>
+            <entry value="0.5416591"/>
+            <entry value="0.45841867"/>
+            <entry value="20"/>
+          </row>
+        </entryITuple>
+      </row>
+      <row>
+        <entry value="9"/>
+        <entry value="1"/>
+        <entry value="2378362712224011803"/>
+        <entry value="0.24015248"/>
+        <entry value="0.4429563572472942"/>
+        <entry value="true"/>
+        <entry value="-106"/>
+        <entry value="a"/>
+        <entry value="ou"/>
+        <entry value="ou"/>
+        <entryITuple>
+        </entryITuple>
+      </row>
+      <row>
+        <entry value="10"/>
+        <entry value="18"/>
+        <entry value="-8488405166955494325"/>
+        <entry value="0.76576376"/>
+        <entry value="0.34091163055606244"/>
+        <entry value="false"/>
+        <entry value="-121"/>
+        <entry value="u"/>
+        <entry value="8q"/>
+        <entry value="8q"/>
+        <entryITuple>
+          <row>
+            <entry value="0.9706288645459041"/>
+            <entry value="0.24994481304936256"/>
+            <entry value="0.5044670930499641"/>
+            <entryITuple>
+            </entryITuple>
+            <entry value="0.66233474"/>
+            <entry value="0.80915546"/>
+            <entry value="0.3980726"/>
+            <entry value="18"/>
+          </row>
+        </entryITuple>
+      </row>
+      <row>
+        <entry value="4"/>
+        <entry value="5"/>
+        <entry value="-37081121301793489"/>
+        <entry value="0.7939321"/>
+        <entry value="0.09082343137109505"/>
+        <entry value="true"/>
+        <entry value="15"/>
+        <entry value="1"/>
+        <entry value="an"/>
+        <entry value="an"/>
+        <entryITuple>
+        </entryITuple>
+      </row>
+      <row>
+        <entry value="6"/>
+        <entry value="6"/>
+        <entry value="4561599633934656281"/>
+        <entry value="0.87026817"/>
+        <entry value="0.36077351082413034"/>
+        <entry value="true"/>
+        <entry value="114"/>
+        <entry value="v"/>
+        <entry value="fg"/>
+        <entry value="fg"/>
+        <entryITuple>
+          <row>
+            <entry value="0.8693571908386677"/>
+            <entry value="0.523789929935156"/>
+            <entry value="0.7651251753765265"/>
+            <entryITuple>
+              <row>
+                <entry value="198"/>
+                <entry value="107"/>
+                <entry value="230"/>
+              </row>
+            </entryITuple>
+            <entry value="0.44208533"/>
+            <entry value="0.54586047"/>
+            <entry value="0.5917177"/>
+            <entry value="16"/>
+          </row>
+        </entryITuple>
+      </row>
+    </rows>
+  </tuple>
+</aida>

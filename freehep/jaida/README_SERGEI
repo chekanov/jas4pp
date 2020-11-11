@@ -1,0 +1,4 @@
+Change in the interface:
+./freehep-jaida/src/main/java/hep/aida/ref/function/AbstractIFunction.java
+
+to allow  Jython complex functions
