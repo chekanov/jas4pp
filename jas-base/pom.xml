@@ -1,0 +1,415 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:pom="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.freehep</groupId>
+    <artifactId>jas-base</artifactId>
+    <version>3.1.4</version>
+    <packaging>pom</packaging>
+    
+    <name>JAS 3 Base</name>
+    <description>JAS 3 Base Application</description>
+    <url>http://jas.freehep.org/jas3/</url>
+    
+    <properties>
+        <javaVersion>1.7</javaVersion>
+        <graphics.version>2.3</graphics.version>
+        <jaida.version>3.4.6</jaida.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+        <buildNumber>${maven.build.timestamp}</buildNumber>
+        <build>Unknown</build>
+        <deployHost>svn.freehep.org</deployHost>
+        <deployDir>/nfs/slac/g/jas/maven2</deployDir>
+        <siteHost>svn.freehep.org</siteHost>
+        <siteDir>/nfs/slac/g/jas/workspace/jas3</siteDir>
+    </properties>
+  
+    <issueManagement>
+        <system>jira</system>
+        <url>https://jira.slac.stanford.edu/browse/JAS</url>
+    </issueManagement>
+  
+    <licenses>
+        <license>
+            <name>GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1</name>
+            <url>http://www.gnu.org/copyleft/lesser.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>http://java.freehep.org/svn/repos/freehep/list/jas/tags/jas-base-3.1.4</url>
+        <connection>scm:svn:svn://svn.freehep.org/svn/jas/tags/jas-base-3.1.4</connection>
+        <developerConnection>scm:svn:svn://svn.freehep.org/svn/jas/tags/jas-base-3.1.4</developerConnection>
+    </scm>
+    
+    <repositories>
+        <repository>
+            <id>freehep-maven2-public</id>
+            <name>Maven FreeHEP</name>
+            <url>http://srs.slac.stanford.edu/nexus/content/groups/freehep-maven2-public/</url>
+        </repository>
+    </repositories>
+    
+    <pluginRepositories>
+        <pluginRepository>
+            <id>freehep-maven2-public</id>
+            <name>Maven FreeHEP</name>
+            <url>http://srs.slac.stanford.edu/nexus/content/groups/freehep-maven2-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>freehep-maven2</id>
+            <name>FreeHep Maven 2 central repository</name>
+            <url>http://srs.slac.stanford.edu/nexus/content/repositories/freehep-maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>freehep-maven2-snapshots</id>
+            <name>FreeHep Maven2 centreal SNAPSHOTS repository</name>
+            <url>http://srs.slac.stanford.edu/nexus/content/repositories/freehep-maven2-snapshots/</url>
+        </snapshotRepository>        
+        <site>
+            <id>jas-site</id>
+            <name>Jas Maven2 centreal site repository</name>
+            <url>dav:http://srs.slac.stanford.edu/nexus/content/sites/jas-site/</url>
+        </site>
+    </distributionManagement>
+
+    
+    <dependencyManagement>
+        <dependencies>
+          
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>base</artifactId>
+                <version>14.0.5</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-heprep</artifactId>
+                <version>2.0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-heprep1</artifactId>
+                <version>1.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-graphicsbase</artifactId>
+                <version>${graphics.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-graphicsio</artifactId>
+                <version>${graphics.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-graphicsio-emf</artifactId>
+                <version>${graphics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-graphicsio-pdf</artifactId>
+                <version>${graphics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-graphicsio-ps</artifactId>
+                <version>${graphics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-graphicsio-svg</artifactId>
+                <version>${graphics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-graphicsio-swf</artifactId>
+                <version>${graphics.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-jaida</artifactId>
+                <version>${jaida.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-jaida-root</artifactId>
+                <version>${jaida.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-jheprep</artifactId>
+                <version>2.0.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-jheprep1</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-jheprep1-adapter</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-rootio</artifactId>
+                <version>2.4</version>
+            </dependency>
+        
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>jas-plotter</artifactId>
+                <version>2.2.9</version>
+            </dependency>
+        
+            <dependency>
+                <groupId>hep.aida</groupId>
+                <artifactId>aida</artifactId>
+                <version>3.3.1</version>
+            </dependency>
+        
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-jminuit</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-jaida-jminuit</artifactId>
+                <version>${jaida.version}</version>
+            </dependency>
+        
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+      
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh-external</artifactId>
+                <version>2.2</version>
+            </extension>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav-jackrabbit</artifactId>
+                <version>2.2</version>
+            </extension>
+        </extensions>
+        
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.3.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin> 
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.5.1</version>
+                    <configuration>
+                        <source>${javaVersion}</source>
+                        <target>${javaVersion}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+                <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-javadoc-plugin</artifactId>
+                  <version>2.10.2</version>
+                  <configuration>
+<!--                    <additionalparam>-Xdoclint:none</additionalparam>-->
+                    <failOnError>false</failOnError>
+                  </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+                <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-release-plugin</artifactId>
+                  <version>2.5</version>
+                  <configuration>
+                    <releaseProfiles>release-profile</releaseProfiles>
+                  </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/filtered-resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        
+        <plugins>
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-descriptor</id>
+                        <goals>
+                            <goal>attach-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+    
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.2</version>
+                <configuration>
+                  <failOnError>false</failOnError>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <id>non-aggregate</id>
+                        <reports>
+                            <report>javadoc</report>
+                            <report>aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.6</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>dependencies</report>
+                            <report>issue-tracking</report>
+                            <report>license</report>
+                            <report>scm</report>
+                            <report>summary</report>
+                            <report>modules</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+    
+  <profiles>
+    
+    <profile>
+      <id>all-modules</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>core</module>
+        <module>extensions</module>
+        <module>assembly</module>
+<!--       <module>webstart</module> --> 
+<!--        <module>macosxFrontEnd</module>-->
+      </modules>
+    </profile>
+    
+    <profile>
+      <id>release-profile</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <modules>
+        <module>core</module>
+        <module>extensions</module>
+        <module>assembly</module>
+        <module>webstart</module>
+      </modules>
+    </profile>
+    
+    <profile>
+      <id>Jenkins</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <modules>
+        <module>core</module>
+        <module>extensions</module>
+        <module>assembly</module>
+        <module>webstart</module>
+<!--        <module>macosxFrontEnd</module>-->
+      </modules>
+    </profile>
+    
+    <profile>
+      <id>core-only</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <modules>
+        <module>core</module>
+      </modules>
+    </profile>
+    
+    <profile>
+      <id>assembly-only</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <modules>
+        <module>core</module>
+        <module>extensions</module>
+        <module>assembly</module>
+      </modules>
+    </profile>
+    
+  </profiles>
+    
+</project>

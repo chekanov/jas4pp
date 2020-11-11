@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE MenuSystem SYSTEM "http://java.freehep.org/schemas/menus/1.1/menus.dtd">
+
+<MenuSystem>
+<MenuBar id="mainMenu">
+    <Menu name="File" mnemonic="F" location="100">
+        <Component name="Save" icon="/toolbarButtonGraphics/general/Save16.gif" command="Save" mnemonic="S" location="200">
+                <Accelerator key="VK_S"/>
+        </Component>
+        <Component name="Save All" icon="/toolbarButtonGraphics/general/SaveAll16.gif" command="SaveAll" location="220">
+        </Component>
+        <Component name="Save As..." icon="/toolbarButtonGraphics/general/SaveAs16.gif" command="SaveAs" mnemonic="A" location="250">
+                <Accelerator key="VK_A"/>
+        </Component>
+    </Menu>
+    <Menu name="Edit" mnemonic="E" location="200">
+       <Component name="Undo" icon="/toolbarButtonGraphics/general/Undo16.gif" command="Undo" mnemonic="U" location="100">
+          <Accelerator key="VK_Z"/>	
+       </Component>
+       <Component name="Redo" icon="/toolbarButtonGraphics/general/Redo16.gif" command="Redo" mnemonic="R" location="110">
+          <Accelerator key="VK_Y"/>	
+       </Component>
+       <Separator location="200"/>
+       <Component name="Cut" icon="/toolbarButtonGraphics/general/Cut16.gif" command="Cut" mnemonic="T" location="210">
+          <Accelerator key="VK_X"/>
+       </Component>
+       <Component name="Copy" icon="/toolbarButtonGraphics/general/Copy16.gif" command="Copy" mnemonic="C" location="220">
+          <Accelerator key="VK_C"/>
+       </Component>
+       <Component name="Paste" icon="/toolbarButtonGraphics/general/Paste16.gif" command="Paste" mnemonic="P" location="230">
+          <Accelerator key="VK_V"/>
+       </Component>
+       <Separator location="500"/>
+       <Component name="Find..." icon="/toolbarButtonGraphics/general/Find16.gif" command="Find" mnemonic="F" location="520">
+          <Accelerator key="VK_L"/>
+       </Component>
+       <Component name="Find Next" icon="/toolbarButtonGraphics/general/FindAgain16.gif" command="FindNext" mnemonic="N" location="540">
+          <Accelerator key="VK_F3" command="false"/>
+       </Component>
+     </Menu>
+</MenuBar>
+
+<ToolBar id="editToolBar" name="Edit Toolbar">
+       <Component name="Undo" icon="/toolbarButtonGraphics/general/Undo16.gif" command="Undo" mnemonic="U">
+          <Accelerator key="VK_Z"/>	
+       </Component>
+       <Component name="Redo" icon="/toolbarButtonGraphics/general/Redo16.gif" command="Redo" mnemonic="R">
+          <Accelerator key="VK_Y"/>	
+       </Component>
+       <Component name="Cut" icon="/toolbarButtonGraphics/general/Cut16.gif" command="Cut" mnemonic="T">
+          <Accelerator key="VK_X"/>
+       </Component>
+       <Component name="Copy" icon="/toolbarButtonGraphics/general/Copy16.gif" command="Copy" mnemonic="C">
+          <Accelerator key="VK_C"/>
+       </Component>
+       <Component name="Paste" icon="/toolbarButtonGraphics/general/Paste16.gif" command="Paste" mnemonic="P">
+          <Accelerator key="VK_V"/>
+       </Component>
+</ToolBar>
+<ToolBar id="fileToolBar" name="File Toolbar">
+        <Component name="Save" icon="/toolbarButtonGraphics/general/Save16.gif" command="Save" mnemonic="S" location="200"/>
+        <Component name="Save All" icon="/toolbarButtonGraphics/general/SaveAll16.gif" command="SaveAll" location="220"/>
+        <Component name="Save As..." icon="/toolbarButtonGraphics/general/SaveAs16.gif" command="SaveAs" mnemonic="A" location="250"/>
+</ToolBar>
+<PopupMenu id="editPopupMenu" name="Edit Popup Menu">
+       <Component name="Save" icon="/toolbarButtonGraphics/general/Save16.gif" command="Save" mnemonic="S">
+          <Accelerator key="VK_S"/>	
+       </Component>
+       <Component name="Refresh" icon="/toolbarButtonGraphics/general/Refresh16.gif" command="Refresh" mnemonic="E">
+       </Component>
+       <Component name="Undo" icon="/toolbarButtonGraphics/general/Undo16.gif" command="Undo" mnemonic="U">
+          <Accelerator key="VK_Z"/>	
+       </Component>
+       <Component name="Redo" icon="/toolbarButtonGraphics/general/Redo16.gif" command="Redo" mnemonic="R">
+          <Accelerator key="VK_Y"/>	
+       </Component>
+       <Component name="Cut" icon="/toolbarButtonGraphics/general/Cut16.gif" command="Cut" mnemonic="T">
+          <Accelerator key="VK_X"/>
+       </Component>
+       <Component name="Copy" icon="/toolbarButtonGraphics/general/Copy16.gif" command="Copy" mnemonic="C">
+          <Accelerator key="VK_C"/>
+       </Component>
+       <Component name="Paste" icon="/toolbarButtonGraphics/general/Paste16.gif" command="Paste" mnemonic="P">
+          <Accelerator key="VK_V"/>
+       </Component>
+</PopupMenu>
+
+</MenuSystem>

@@ -1,0 +1,44 @@
+use("pnuts.lib")
+
+IAnalysisFactory = class hep.aida.IAnalysisFactory
+af = IAnalysisFactory::create()
+tree = af.createTreeFactory().create()
+hf = af.createHistogramFactory(tree)
+
+Random = class java.util.Random
+r = Random()
+
+plotter = af.createPlotterFactory().create("CreateAndPlotHistograms.pnut Plot")
+plotter.createRegions(2,2)
+plotter.show()
+
+tree.mkdirs("/Histograms")
+tree.cd("/Histograms")
+h1 = hf.createHistogram1D("Histogram 1D",50,-3,3)
+h2 = hf.createHistogram2D("Histogram 2D",40,-3,3,40,-3,3)
+tree.mkdirs("/Clouds")
+tree.cd("/Clouds")
+c1 = hf.createCloud1D("Cloud 1D")
+c2 = hf.createCloud2D("Cloud 2D")
+
+plotter.region(0).plot(h1)
+plotter.region(1).plot(h2)
+plotter.region(2).plot(c1)
+plotter.region(3).plot(c2)
+
+function fill()
+{
+  for (i=0; i<100000; i++)
+  {
+    h1.fill(r.nextGaussian())
+    h2.fill(r.nextGaussian(),r.nextGaussian())
+    c1.fill(r.nextGaussian())
+    c2.fill(r.nextGaussian(),r.nextGaussian())
+  }
+}
+
+System = class java.lang.System
+start = System::currentTimeMillis()
+fill()
+end = System::currentTimeMillis()
+println(end-start)

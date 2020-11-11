@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<document> 
+
+  <body>
+    <section name="News" >
+    <p>
+      <strong>14 October 2015</strong> - Version 3.1.3 has been released.
+      This version adds "Docked Frames" page manager that allows displaying Jas3 pages as tabs or independent frames.
+      Several enhancements have been made to the application framework used for developing customized applications based on Jas3.
+    </p>
+    <p>
+      <strong>22 August 2014</strong> - Version 3.1.0 has been released.
+      The main goal of this release is to ensure compatibility with Java 8 and other recent versions 
+      of Java Runtime Environment on all supported platforms. JDK 1.6 is no longer supported.
+      See <a href="ReleaseNotes.html">release notes</a> for a list of other changes.
+    </p>
+    <p>
+      <strong>6 August 2014</strong> - <a href="https://groups.google.com/forum/#!forum/freehep-users">Google group</a>
+      has been created for Jas 3 related discussions, questions, and bug reports.
+    </p>
+    <p>
+      <strong>22 May 2013</strong> - Version 3.0.0 has been released.
+      Unlike earlier versions, 3.0.0 contains only the minimal set of built-in plugins. All extensions
+      can be downloaded through the plugin manager. See <a href="ReleaseNotes.html">release notes</a> for more details.
+    </p>
+    </section>
+    
+    <section name="Description" >
+      
+    <p>
+      <strong>Jas3 is a flexible, extendable, experiment-independent interactive data analysis framework.</strong>
+      Features provided by the Jas3 interactive shell and a suite of standard extensions include:
+      <ul>
+        <li>Plotting of 1d, 2d and 3d histograms, XY plots, scatterplots etc.</li>
+        <li>High quality print output.</li>
+        <li>Fitting (binned or unbinned) using an extensible set of optimizers including Minuit.</li>
+        <li>Export of plots in a variety of formats including PS, EPS, PDF, SVG, GIF, PNG.</li>
+        <li>Easy to learn GUI for performing common analysis tasks (plotting, ntuple-analysis, fitting etc.).</li>
+        <li>More complex analysis can be performed using a variety of scripting languages (pnuts, jython, etc.), 
+            or by writing Java analysis modules.</li> 
+        <li>Able to read data in a variety of formats including: SQL databases, text-files (see also HEP specific features).</li>
+        <li>AIDA compliant analysis system.</li>
+        <li>Built-in editor and compiler.</li>
+        <li>Simple spreadsheet capabilities.</li>
+        <li>Logbook for recording analysis tasks, and optionally publishing results to the web.</li>
+        <li>Highly modular structure allows addition, replacement or removal of modules 
+            to customize application for a particular problem domain.</li>
+      </ul>
+      Many additional plugins can be downloaded through the Jas3 plugin manager.
+      Examples include <a href="http://wired.freehep.org/">WIRED Event Display</a> and 
+      <a href="https://confluence.slac.stanford.edu/display/ilc/lcsim+Getting+Started">org.lcsim analysis framework</a>.
+    </p>
+    <p>
+      Jas3 was originally developed for use in High Energy Physics experiments,
+      but it has found applications in a multitude of other fields.
+      Jas3 in written in Java and makes extensive use of FreeHEP libraries. 
+      Jas3 is developed and maintained by the FreeHEP team at 
+      <a href="http://www.slac.stanford.edu/">SLAC</a>.
+    </p>
+    <p>
+      <a href="launcher.html">Launcher</a>
+    </p>
+    </section>
+
+  </body>
+</document>

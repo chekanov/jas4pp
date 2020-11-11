@@ -1,0 +1,32 @@
+IAnalysisFactory = class hep.aida.IAnalysisFactory;
+af = IAnalysisFactory::create();
+tree = af.createTreeFactory().create();
+
+hf = af.createHistogramFactory(tree);
+h1 = hf.createHistogram1D("Histogram 1D",50,-3,3);
+
+plotter = af.createPlotterFactory().create("Style1D.pnut Plot");
+plotter.region(0).plot(h1);
+plotter.show();
+
+style = plotter.region(0).style();
+
+
+style.regionBoxStyle().backgroundStyle().setColor("255,255,104");
+style.dataBoxStyle().backgroundStyle().setColor("204,255,255");
+style.dataBoxStyle().borderStyle().setBorderType("shadow");
+style.dataStyle().lineStyle().setVisible(false);
+style.dataStyle().fillStyle().setVisible(false);
+style.dataStyle().markerStyle().setVisible(true);
+style.dataStyle().markerStyle().setShape("circle");
+
+
+Random = class java.util.Random;
+r = Random();
+for (i=0; i<100000; i++) {
+    h1.fill(r.nextGaussian());
+}
+
+
+
+

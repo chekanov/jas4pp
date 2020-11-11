@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE MenuSystem SYSTEM "http://java.freehep.org/schemas/menus/1.1/menus.dtd">
+
+<MenuSystem>
+   <PopupMenu id="consolePopupMenu" name="Console Popup Menu">
+      <Component name="Copy"                command="CopyConsoleSelection" mnemonic="C"/>   
+      <Component name="Clear"               command="Clear"                mnemonic="R"/>   
+      <Component name="Select All"          command="SelectAll"            mnemonic="A"/>   
+      <Component name="Properties..."       command="Properties"           mnemonic="P"/>   
+      <Menu name="Logging" mnemonic="L">
+         <Component name="Open Log File..." command="OpenLogFile"          mnemonic="O"/>   
+         <Component name="Enable Logging"   command="EnableLogging"  type="checkbox"	mnemonic="E"/>   
+         <Component name="Close Log File"   command="CloseLogFile"         mnemonic="C"/>   
+      </Menu>
+   </PopupMenu>
+</MenuSystem>

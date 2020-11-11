@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE textmetadata SYSTEM "http://java.freehep.org/schemas/textmetadata/1.0/textmetadata.dtd">
+
+<textmetadata>
+  <options gzip="false" previewLines="1000" comment="#" headerRow="1" firstDataRow="2"/> 
+  <delimited delimiters=" " coalesceDelimiters="true" textQualifier="'"/>
+  <columns>
+     <column index="1" skip="true" name="category">
+       <format name="Integer" param="xyz"/>
+     </column>
+     <column index="2" skip="true" name="category">
+       <format name="Integer" param="xyz"/>
+     </column>
+  </columns>   
+</textmetadata>

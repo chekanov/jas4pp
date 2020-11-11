@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "JAS3", "JAS3.vdproj", "{F112B171-D77E-4D55-99B4-C25FC180319C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{F112B171-D77E-4D55-99B4-C25FC180319C}.Debug.ActiveCfg = Debug
+		{F112B171-D77E-4D55-99B4-C25FC180319C}.Debug.Build.0 = Debug
+		{F112B171-D77E-4D55-99B4-C25FC180319C}.Release.ActiveCfg = Release
+		{F112B171-D77E-4D55-99B4-C25FC180319C}.Release.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

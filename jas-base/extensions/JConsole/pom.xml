@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:pom="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+  
+    <parent>
+        <groupId>org.freehep</groupId>
+        <artifactId>jas-extensions</artifactId>
+        <version>3.1.1</version>
+        <relativePath />
+    </parent>
+
+    <groupId>org.freehep</groupId>
+    <artifactId>jas-jconsole</artifactId>
+    <version>1.0.2-SNAPSHOT</version>
+
+    <name>JAS 3 JConsole</name>
+    <description>
+       Adds support for creating JLine based consoles.
+       The plugin is under development, only limited functionality is currently available.
+       Potentially, this can be used as a stub to develop replacement for the JAS console service.
+    </description>
+    
+    <properties>
+        <javaVersion>1.8</javaVersion>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>freehep-maven2-public</id>
+            <name>Maven FreeHEP</name>
+            <url>http://srs.slac.stanford.edu/nexus/content/groups/freehep-maven2-public/</url>
+        </repository>
+        <repository>
+            <id>lsst-maven2-public</id>
+            <name>LSST Maven 2 central repository</name>
+            <url>http://dev.lsstcorp.org:8081/nexus/content/groups/ccs-maven2-public/</url>
+        </repository>
+    </repositories>
+    
+    <pluginRepositories>
+        <pluginRepository>
+            <id>freehep-maven2-public</id>
+            <name>Maven FreeHEP</name>
+            <url>http://srs.slac.stanford.edu/nexus/content/groups/freehep-maven2-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <scm>
+        <url>svnFreehepRepo</url>
+        <connection>scm:svn:svn://svn.freehep.org/svn/jas/trunk/extensions/JConsole</connection>
+        <developerConnection>scm:svn:svn://svn.freehep.org/svn/jas/trunk/extensions/JConsole</developerConnection>
+    </scm>
+
+    <dependencies>
+        <dependency>            
+            <groupId>com.wittams</groupId>
+            <artifactId>gritty</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>            
+            <groupId>jline</groupId>
+            <artifactId>jline</artifactId>
+            <version>2.11</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+    </dependencies>
+    
+</project>

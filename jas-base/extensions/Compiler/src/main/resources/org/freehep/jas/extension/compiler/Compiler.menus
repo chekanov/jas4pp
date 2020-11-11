@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE MenuSystem SYSTEM "http://java.freehep.org/schemas/menus/1.1/menus.dtd">
+
+<MenuSystem>
+<MenuBar id="mainMenu">
+    <Menu name="File" mnemonic="F" location="100">
+        <Menu name="New" mnemonic="N" location="50">
+            <Component type="default" icon="images/java.gif" name="Java File" mnemonic="J" command="javaFile"  location="800"/>
+        </Menu>
+    <Separator location="500"/>    
+    <Component name="Compile" icon="images/compile.gif" command="compile" mnemonic="C" location="540">
+          <Accelerator key="VK_F9" command="false"/>	
+    </Component>
+    <Component name="Load..." command="loadClass" mnemonic="L" location="542"/>
+    <Component name="Run" icon="/toolbarButtonGraphics/media/FastForward16.gif" command="run" mnemonic="R" location="550">
+          <Accelerator key="VK_F2" command="false"/>	
+    </Component>
+    </Menu>
+</MenuBar>
+</MenuSystem>

@@ -1,0 +1,35 @@
+IAnalysisFactory = class hep.aida.IAnalysisFactory
+af = IAnalysisFactory::create()
+
+// Create a folder with two histograms in it. This is meant to emulate the
+// opening of a file.
+
+tree = af.createTreeFactory().create("","",false,false,"mountpoint=/Pnut Folder")
+hf = af.createHistogramFactory(tree)
+
+h1 = hf.createHistogram1D("hist1D","Example of Histogram1D",100, -5, 5)
+h2 = hf.createHistogram2D("hist2D","Example of Histogram2D",100, -5, 5,100, -5, 5)
+
+Random = class java.util.Random
+r = Random()
+r1 = Random()
+
+for ( i = 0; i < 10000; i++ ) {
+      h1.fill( r.nextGaussian() );
+      h2.fill( r.nextGaussian(), r1.nextGaussian() );
+}
+
+// We will access now the above histograms using the 
+// JAS3 internal AIDA tree called "aidaMasterTree"
+
+hist1D = aidaMasterTree.find("/Pnut Folder/hist1D");
+hist2D = aidaMasterTree.find("/Pnut Folder/hist2D");
+
+plotter = af.createPlotterFactory().create("AccessDataOnMasterTree.pnut plot");
+plotter.createRegions(1,2,0);
+plotter.region(0).plot(hist1D);
+plotter.region(1).plot(hist2D);
+plotter.show();
+
+
+

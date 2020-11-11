@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!-- JNLP File for JAS3--> 
+<jnlp 
+  spec="1.0" 
+  codebase="http://jas.freehep.org/jas3/webstart" 
+  href="jas3.jnlp"
+  version ="@VERSION@"> 
+  <information> 
+    <title>JAS3</title> 
+    <vendor>JAS 3 Team</vendor> 
+    <homepage href="http://jas.freehep.org"/> 
+    <description>JAS3 Data Analysis Studio</description> 
+    <description kind="short">A framework for data analysis.</description>
+    <icon href="jas3.png"/> 
+    <offline-allowed/> 
+  </information> 
+  <security>
+    <all-permissions/>
+  </security>   
+  <resources>
+    <j2se version="1.4+" max-heap-size="256m"/>
+    <property name="jnlp.jas3" value="true"/>
+  </resources> 
+  <resources os="Mac OS X">
+     <jar href="jars/macosx/MacOSXPlugin.jar" />
+     <property name="apple.laf.useScreenMenuBar" value="true"/>
+     <property name="apple.awt.showGrowBox" value="true"/>
+     <property name="apple.awt.brushMetalLook" value="false"/>
+  </resources> 
+  <application-desc main-class="org.freehep.jas.JAS3"/> 
+</jnlp> 

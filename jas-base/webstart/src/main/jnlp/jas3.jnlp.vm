@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp href="jas3.jnlp" codebase="$jnlpCodebase">
+   <information>
+      <title>Jas 3</title>
+      <vendor>FreeHEP team at SLAC</vendor>
+      <homepage href="http://jas.freehep.org/"/>
+      <description>JAS3 - Java Analysis Studio</description>
+      <description kind="short">
+        Jas3 interactive analysis shell.
+      </description>
+      <icon href="jas3.png"/>
+      <offline-allowed />
+      <shortcut>
+         <desktop/>
+         <menu submenu="Jas 3 WebStart"/>
+      </shortcut>
+   </information>
+   <security>
+      <all-permissions />
+   </security>
+   <update check="background"/>
+   <resources>
+      <j2se version="1.7+" max-heap-size="2048m" />
+      <property name="jnlp.jas3" value="true" />
+      <property name="jnlp.freehep.app.title" value="JAS 3"/>
+      <property name="jnlp.userPrefDir" value="{user.home}/.jas3ws/user.properties"/>
+      <property name="jnlp.org.freehep.application.studio.user.extensions" value="{user.home}/.jas3ws/extensions"/>
+      $dependencies
+   </resources>
+<!--   <resources os="Mac OS X">
+      <jar href="lib/MacOSXPlugin-${project.dependency.org.freehep.external.MacOSXPlugin.jar.version}.jar" />
+      <property name="jnlp.apple.laf.useScreenMenuBar" value="true" />
+      <property name="jnlp.apple.awt.showGrowBox" value="true" />
+      <property name="jnlp.apple.awt.brushMetalLook" value="false" />
+   </resources>-->
+   <application-desc main-class="org.freehep.jas.JAS3"/>
+</jnlp>

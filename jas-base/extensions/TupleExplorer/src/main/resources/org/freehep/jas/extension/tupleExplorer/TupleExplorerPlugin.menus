@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE MenuSystem SYSTEM "http://java.freehep.org/schemas/menus/1.1/menus.dtd">
+
+<MenuSystem>
+<MenuBar id="mainMenu">
+    <Menu name="Tuple" mnemonic="T" location="400">
+        <Menu name="Histogram" mnemonic="H" location="100">
+            <Component type="default" name="Plot Histogram In Current Region" command="plotHistogramInCurrentRegion" location="100"/>
+            <Component type="default" name="Plot Histogram In New Region" command="plotHistogramInNewRegion" location="100"/>
+            <Component type="default" name="Plot Histogram In New Page" command="plotHistogramInNewPage" location="100"/>
+            <Component type="default" name="Overlay Histogram" mnemonic="O" command="overlayHistogram" location="100"/>
+        </Menu>
+        <Menu name="Profile" mnemonic="P" location="100">
+            <Component type="default" name="Plot Profile In Current Region" command="plotProfileInCurrentRegion" location="100"/>
+            <Component type="default" name="Plot Profile In New Region" command="plotProfileInNewRegion" location="100"/>
+            <Component type="default" name="Plot Profile In New Page" command="plotProfileInNewPage" location="100"/>
+            <Component type="default" name="Overlay Profile" command="overlayProfile" location="100"/>
+        </Menu>
+        <Menu name="Scatter Plot" mnemonic="S" location="100">
+            <Component type="default" name="Plot Scatter Plot In Current Region" command="plotScatterPlotInCurrentRegion" location="100"/>
+            <Component type="default" name="Plot Scatter Plot In New Region" command="plotScatterPlotInNewRegion" location="100"/>
+            <Component type="default" name="Plot Scatter Plot In New Page" command="plotScatterPlotInNewPage" location="100"/>
+            <Component type="default" name="Overlay Scatter Plot" command="overlayScatterPlot" location="100"/>
+        </Menu>
+        <Menu name="XYPlot" mnemonic="X" location="100">
+            <Component type="default" name="Plot XYPlot In Current Region" command="plotXYPlotInCurrentRegion" location="100"/>
+            <Component type="default" name="Plot XYPlot In New Region" command="plotXYPlotInNewRegion" location="100"/>
+            <Component type="default" name="Plot XYPlot In New Page" command="plotXYPlotInNewPage" location="100"/>
+            <Component type="default" name="Overlay XYPlot" command="overlayXYPlot" location="100"/>
+        </Menu>     
+        <Separator/>
+        <Component type="default" name="Tabulate Tuple" mnemonic="T" command="tabulateTuple" location="100"/>
+        <Component type="default" name="Tabulate Selected Columns" mnemonic="C" command="tabulateSelectedColumns" location="200"/>
+        <Separator/>
+        <Component type="default" name="Add Cut ..." mnemonic="C" command="addCut" location="200"/>
+        <Component type="default" name="Add Column ..." command="addColumn" location="300"/>
+        <Separator/>
+        <Component type="default" name="Load Tuple In Memory" command="loadTupleInMemory" location="100"/>
+        <Separator/>
+    </Menu>
+</MenuBar>
+</MenuSystem>

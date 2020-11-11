@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JNLP File for JAS3-->
+<jnlp spec="1.0" codebase="http://glast-ground.slac.stanford.edu/dc2/wired/" href="wired4.jnlp" version="0.8.3">
+   <information>
+      <title>GLAST WIRED4</title>
+      <vendor>JAS 3 Team</vendor>
+      <homepage href="http://jas.freehep.org" />
+      <description>JAS3 Data Analysis Studio - WIRED4/GLAST configuration</description>
+      <description kind="short">A framework for data analysis and event visualization.</description>
+      <icon href="jas3.png" />
+      <offline-allowed />
+      <shortcut>
+         <desktop/>
+         <menu submenu="GLAST"/>
+      </shortcut>
+   </information>
+   <security>
+      <all-permissions />
+   </security>
+   <resources>
+      <j2se version="1.4+" max-heap-size="256m" />
+      <property name="jnlp.jas3" value="true" />
+      <jar href="jars/aida-dev.jar" />
+      <jar href="jars/aida.jar" />
+      <jar href="jars/AidaPlugin.jar" />
+      <jar href="jars/BrowserLauncher2.jar" />
+      <jar href="jars/CompilerPlugin.jar" />
+      <jar href="jars/ExcelPlugin.jar" />
+      <jar href="jars/freehep-base.jar" />
+      <jar href="jars/freehep-graphics2d.jar" />
+      <jar href="jars/freehep-graphicsio-cgm.jar" />
+      <jar href="jars/freehep-graphicsio-emf.jar" />
+      <jar href="jars/freehep-graphicsio-gif.jar" />
+      <jar href="jars/freehep-graphicsio-pdf.jar" />
+      <jar href="jars/freehep-graphicsio-ppm.jar" />
+      <jar href="jars/freehep-graphicsio-ps.jar" />
+      <jar href="jars/freehep-graphicsio-svg.jar" />
+      <jar href="jars/freehep-graphicsio-swf.jar" />
+      <jar href="jars/freehep-graphicsio.jar" />
+      <jar href="jars/freehep-hep.jar" />
+      <jar href="jars/freehep-heprep.jar" />
+      <jar href="jars/freehep-heprep1.jar" />
+      <jar href="jars/freehep-jheprep.jar" />
+      <jar href="jars/freehep-jheprep1-adapter.jar" />
+      <jar href="jars/freehep-jheprep1.jar" />
+      <jar href="jars/HepRep.jar" />
+      <jar href="jars/jas-plotter.jar" />
+      <jar href="jars/jas3.jar" main="true" />
+      <jar href="jars/jc.jar" />
+      <jar href="jars/jdom.jar" />
+      <jar href="jars/jel.jar" />
+      <jar href="jars/jlfgr.jar" />
+      <jar href="jars/JMinuit.jar" />
+      <jar href="jars/jsch.jar" />
+      <jar href="jars/jxl.jar" />
+      <jar href="jars/kxml2.jar" />
+      <jar href="jars/openide-lookup.jar" />
+      <jar href="jars/optimizers.jar" />
+      <jar href="jars/pnuts-modules.jar" />
+      <jar href="jars/pnuts.jar" />
+      <jar href="jars/PnutsPlugin.jar" />
+      <jar href="jars/RecordLoop.jar" />
+      <jar href="jars/SimpleEditor.jar" />
+      <jar href="jars/Spreadsheet.jar" />
+      <jar href="jars/TupleExplorer.jar" />
+      <jar href="jars/wired-glast.jar" />
+      <jar href="jars/wired-hepeventserver.jar" />
+      <jar href="jars/WiredBase.jar" />
+      <jar href="jars/WiredPlugin.jar" />
+   </resources>
+   <resources os="Mac OS X">
+      <jar href="jars/macosx/MacOSXPlugin.jar" />
+      <property name="apple.laf.useScreenMenuBar" value="true" />
+      <property name="apple.awt.showGrowBox" value="true" />
+      <property name="apple.awt.brushMetalLook" value="false" />
+   </resources>
+   <application-desc main-class="org.freehep.jas.JAS3">
+       <argument>-Dtitle=JAS3: GLAST-WIRED4</argument>
+       <argument>-DuserPrefDir={user.home}/.Glast-Wired4/user.properties</argument>
+       <argument>-Dorg.freehep.application.studio.user.extensions={user.home}/.Glast-Wired4/extensions</argument>
+       <argument>-Dhep.wired.heprep.plugin.new.view</argument>
+       <argument>-Dhep.wired.glast.plugin.open</argument>
+       <argument>-DshowWelcomePageAtStart=false</argument>
+       <argument>-dhep.wired.heprep.heprepPanel=hep.wired.heprep.projection.ParallelProjection$XZ</argument>
+   </application-desc>
+</jnlp>

@@ -1,0 +1,39 @@
+#!/bin/sh -f
+########################################################################
+#
+# Java Analysis Studio shell script
+#
+# Runs `java' from ${JAVAROOT}/bin if environment variable JAVAROOT
+# is defined; otherwise, runs default `java'
+#
+# If environment variable JASEXTRACLASSPATH is defined, this is 
+# prepended to the CLASSPATH when running JAS. 
+#
+# Arguments to JVM can be passed through the JASJVM_ARGS environment 
+# variable
+#
+########################################################################
+# Start by finding the root of the JAS installation (the directory
+# containing this file)
+#
+# If PRG is a symlink, trace it to the real home directory
+    PRG=`type $0` > /dev/null 2>&1
+    PRG=`expr "$PRG" : ".* is \(.*\)"`
+    while test -h "$PRG"; do
+      newprg=`expr "\`/bin/ls -l "$PRG"\`" : ".*$PRG -> \(.*\)"`
+      expr "$newprg" : "\/" > /dev/null || newprg="`dirname $PRG`/$newprg"
+      PRG="$newprg"
+    done
+    JASROOT=`dirname $PRG`
+    #echo jasroot=$JASROOT
+
+JASJAR="jas-core-${project.version}.jar"
+
+JAVA="java"
+if [ ${JAVAHOME:-NONE} != "NONE" ] ; then
+    JAVA="${JAVAHOME}/bin/java"
+fi
+
+AWT_TOOLKIT="XToolkit"
+
+exec ${JAVA} -Xmx${java.memory} -Dapplication.home=${JASROOT} ${JASJVM_ARGS} -jar ${JASROOT}/lib/${JASJAR} $*

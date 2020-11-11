@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE MenuSystem SYSTEM "http://java.freehep.org/schemas/menus/1.1/menus.dtd">
+
+<MenuSystem>
+   <MenuBar id="mainMenu">
+      <Menu name="File" mnemonic="F" location="100">
+         <Menu name="New" mnemonic="N" location="50">
+            <Component type="default" icon="pnuts16.png" name="Pnuts Script" mnemonic="S" command="pnutsScript"  location="750"/>
+            <Component type="default" icon="pnuts16.png" name="Pnuts Console" mnemonic="C" command="pnutsConsole"  location="751"/>
+         </Menu>
+         <Separator location="500"/>    
+         <Component name="Run" icon="/toolbarButtonGraphics/media/FastForward16.gif" command="run" mnemonic="R" location="550">
+            <Accelerator key="VK_F2" command="false"/>	
+         </Component>
+      </Menu>
+      <Menu name="Help" mnemonic="H" location="900">
+         <Menu name="Documentation" mnemonic="D" location="600">
+             <Component name="Pnuts Scripting" command="ShowPnutsDocumentation" location="200"/>
+         </Menu>
+      </Menu>
+   </MenuBar>
+</MenuSystem>

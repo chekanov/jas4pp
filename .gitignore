@@ -1,3 +1,5 @@
+*/cachedir/**
+target/
 /target/
 */target/**
 *~

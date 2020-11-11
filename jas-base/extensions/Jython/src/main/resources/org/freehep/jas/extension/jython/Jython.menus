@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE MenuSystem SYSTEM "http://java.freehep.org/schemas/menus/1.1/menus.dtd">
+
+<MenuSystem>
+<MenuBar id="mainMenu">
+    <Menu name="File" mnemonic="F" location="100">
+        <Menu name="New" mnemonic="N" location="50">
+            <Component type="default" name="Python Script" mnemonic="S" command="jythonScript"  location="730" icon="/org/freehep/jas/extension/jython/python.gif"/>
+            <Component type="default" name="Python Console" mnemonic="C" command="jythonConsole"  location="731" icon="/org/freehep/jas/extension/jython/pycon.gif"/>
+        </Menu>
+    </Menu>
+</MenuBar>
+</MenuSystem>

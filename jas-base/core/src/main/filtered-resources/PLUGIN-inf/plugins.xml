@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE plugins SYSTEM "http://java.freehep.org/schemas/plugin/1.0/plugin.dtd">
+
+<!-- Created by tonyj on August 22, 2002, 5:02 PM -->
+
+<plugins>
+    <plugin>
+      <information>
+          <name>Web Browser</name>
+          <author>Tony Johnson</author>
+          <version>${project.version}</version>
+          <description kind="short">A simple Web Browser</description>
+          <description>A Web browser based on Swing's built-in HTMLEditorKit.</description>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+      </resources> 
+      <provides class="org.freehep.jas.services.WebBrowser"/>
+      <plugin-desc class="org.freehep.jas.plugin.web.SimpleWebBrowser"/>
+    </plugin>
+    <plugin>
+      <information>
+          <name>File Opener</name>
+          <author>Tony Johnson</author>
+          <version>${project.version}</version>
+          <description kind="short">A plugable file opener</description>
+          <description>Allows file to be opened via a pluggable FileHandler mechanism.</description>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+      </resources> 
+      <plugin-desc class="org.freehep.jas.plugin.basic.FileOpener"/>
+    </plugin>
+    <plugin>
+      <information>
+          <name>Status Bar</name>
+          <author>Tony Johnson</author>
+          <version>${project.version}</version>
+          <description kind="short">Status Bar Utilities</description>
+          <description>Displays a status bar and options progress meter in the status bar.</description>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+      </resources> 
+      <provides class="org.freehep.jas.services.ProgressMeterProvider"/>
+      <plugin-desc class="org.freehep.jas.plugin.basic.StatusBarPlugin"/>
+    </plugin>
+    <plugin>
+      <information>
+          <name>Plugin Manager</name>
+          <author>Tony Johnson</author>
+          <version>${project.version}</version>
+          <description kind="short">A manager for Plugins</description>
+          <description>Allows plugins to be installed, updated and removed.</description>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+      </resources> 
+      <plugin-desc class="org.freehep.jas.plugin.pluginmanager.PluginManager"/>
+    </plugin>
+    <plugin>
+      <information>
+          <name>Tree</name>
+          <author>SLAC FreeHEP team</author>
+          <version>${project.version}</version>
+          <description kind="short">Tree Utility</description>
+          <description>Displays objects on a tree</description>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+      </resources> 
+      <plugin-desc class="org.freehep.jas.plugin.tree.FTreePlugin"/>
+    </plugin>
+    <plugin>
+      <information>
+          <name>Flasing Node Plugin</name>
+          <author>SLAC JAS Team</author>
+          <version>${project.version}</version>
+          <description kind="short">A plugin to make FTreeNodes flash</description>
+          <description>With this adapter it is possible to make nodes of type FlashingNode flash</description>
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+      </resources> 
+      <plugin-desc class="org.freehep.jas.plugin.tree.utils.flashingNode.FlashingNodePlugin"/>
+    </plugin>
+    <plugin>
+      <information>
+          <name>Link Node Plugin</name>
+          <author>SLAC JAS Team</author>
+          <version>${project.version}</version>
+          <description kind="short">A plugin to make links on the FTree</description>
+          <description>With this plugin it is possible to have symbolic links on the FTree</description>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+      </resources> 
+      <plugin-desc class="org.freehep.jas.plugin.tree.utils.linkNode.LinkNodePlugin"/>
+    </plugin>
+    <plugin>
+      <information>
+          <name>Console</name>
+          <author>Tony Johnson</author>
+          <version>${project.version}</version>
+          <description kind="short">A logging Console</description>
+          <description>Allows input and output from the JAS Console area.</description>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+      </resources> 
+      <provides class="org.freehep.jas.plugin.console.ConsoleService"/>
+      <plugin-desc class="org.freehep.jas.plugin.console.ConsolePlugin"/>
+    </plugin>
+    <plugin>
+      <information>
+          <name>Preferences</name>
+          <author>Tony Johnson</author>
+          <version>${project.version}</version>
+          <description kind="short">A Preferences Dialog</description>
+          <description>Provides a general purpose preferences dialog.</description>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+      </resources> 
+      <plugin-desc class="org.freehep.jas.plugin.preferences.PreferencesPlugin"/>
+    </plugin>
+    <plugin>
+      <information>
+          <name>Plotter</name>
+          <author>Tony Johnson</author>
+          <version>${project.version}</version>
+          <description kind="short">Basic plotter functionality</description>
+          <description>Creates Pages, Regions and Plots</description>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+      </resources> 
+      <provides class="org.freehep.jas.services.PlotFactory"/>
+      <plugin-desc class="org.freehep.jas.plugin.plotter.PlotterPlugin"/>
+    </plugin>   
+    <plugin>
+      <information>
+          <name>Save/Restore</name>
+          <author>Max Turri</author>
+          <version>${project.version}</version>
+          <description kind="short">Save and Restore configuration.</description>
+          <description>Allows the user to save the current configuration and/or to restore a previously saved one.</description>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+      </resources> 
+      <plugin-desc class="org.freehep.jas.plugin.xmlio.XMLIOPlugin"/>
+    </plugin>   
+    <plugin>
+      <information>
+          <name>Data Source Plugin</name>
+          <author>SLAC JAS Team</author>
+          <version>${project.version}</version>
+          <description kind="short">Adds a data source item to the file menu</description>
+          <description>Adds a data source item to the file menu.</description>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+      </resources> 
+      <plugin-desc class="org.freehep.jas.plugin.datasource.DataSourcePlugin"/>
+    </plugin>
+</plugins>

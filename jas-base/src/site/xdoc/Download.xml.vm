@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+  <properties>
+    <title>Download WIRED</title>
+  </properties>
+
+  <body>
+
+    <section name="Downloads">
+
+      <p>
+      To install Jas3, first make sure Java is installed on your machine. If it is not, you can download
+      the latest version from <a href="http://www.java.com/en/download/index.jsp">Oracle web site</a>. 
+      Version 1.7 or later is required to run Jas3.
+      We also recommend against using OpenJDK Runtime Environment at this time.
+      </p><p>
+      If you have used 0.X.X versions of Jas 3 in the past, please delete the Jas 3 application data 
+      directory (~/.JAS3) before installing the current version of Jas 3.
+      </p><p>
+      Download the latest Jas3 distribution
+      </p><p>
+      <a href="http://java.freehep.org/maven2/org/freehep/jas-assembly/${project.version}/jas-assembly-${project.version}-distribution.zip">jas-assembly-${project.version}-distribution.zip</a><br/>
+      <a href="http://java.freehep.org/maven2/org/freehep/jas-assembly/${project.version}/jas-assembly-${project.version}-distribution.tar.gz">jas-assembly-${project.version}-distribution.tar.gz</a>
+      </p><p>
+      and unpack it into the directory where you want Jas3 to be installed. 
+      The launch scripts are in the <b>jas-assembly-${project.version}</b> directory - please choose the one appropriate for your platform.
+      The distribution contains a minimal set of built-in plugins.
+      Once you start Jas3, additional plugins can be downloaded through the plugin manager (View - Plugin Manager).
+      If you wish to install a typical set of extensions required by most users, please select the "Jas 3 Standard Extensions"
+      plugin. 
+      </p><p>
+      <div id="webstart" style="background-color:#EEEEEE; border:1px solid black; margin:10px; padding:10px;">
+        <script src="https://www.java.com/js/deployJava.js"></script>
+        <table style="background-color:#EEEEEE;"><tr><td style="background-color:#EEEEEE; margin:10px;">
+        <a href="jas-webstart/jas3.jnlp"><img src="images/jas3webstart.png" style="align:left; vertical-align:middle; margin:5px 10px;"/></a>
+        </td><td style="background-color:#EEEEEE;">
+        If Java Web Start is enabled on your machine, single click installation of Jas3 with a minimal
+        set of extensions is also available.
+        </td></tr></table>
+      </div>
+      </p><p>
+      Older releases of Jas3 can be downloaded from <a href="http://java.freehep.org/maven2/org/freehep/jas-assembly/">Maven repository</a>.
+      Earlier beta releases are also <a href="ftp://ftp.slac.stanford.edu/software/jas/JAS3/">available</a>.
+      </p>
+      <div id="dev" style="background-color:#EEEEEE; border:1px solid black; margin:10px; padding:10px;">
+        The latest development version
+        <a href="dev">can be downloaded</a>
+        for testing and evaluation purposes.
+        Note that the development version is updated frequently, may produce diagnostic output, and may behave differently from 
+        the production version. Use at your own risk.
+      </div>
+
+    </section>
+
+  </body>
+
+</document>

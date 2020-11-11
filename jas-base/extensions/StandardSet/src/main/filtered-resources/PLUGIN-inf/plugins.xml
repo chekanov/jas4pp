@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plugins SYSTEM "http://java.freehep.org/schemas/plugin/1.1/plugin.dtd">
+
+<plugins>
+     <plugin>
+      <information>
+          <name>${project.name}</name>
+          <author>SLAC FreeHEP Team</author>
+          <version>${project.version}</version>
+          <description kind="short">Typical set of extensions.</description>
+          <description>${project.description}</description>
+          <category>,</category>
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+          <application minVersion="3.0.0"/>
+          <depends plugin="JAS 3 AIDA Plugin" minVersion="3.3.5" />
+          <depends plugin="JAS 3 Compiler plugin" minVersion="1.2.4" />
+          <depends plugin="JAS 3 Graphics IO" minVersion="1.2.3" />
+          <depends plugin="JAS 3 JMinuit Fitter" minVersion="1.0.3" />
+          <depends plugin="JAS 3 Groovy Plugin" minVersion="1.2.3" />
+          <depends plugin="JAS 3 Jython Plugin" minVersion="1.2.3" />
+          <depends plugin="JAS 3 Record Loop" minVersion="2.1.1" />
+          <depends plugin="JAS 3 Root Plugin" minVersion="4.6.3" />
+          <depends plugin="JAS 3 Simple Editor" minVersion="1.2.4" />
+          <depends plugin="JAS 3 Tuple Explorer" minVersion="2.2.3" />
+      </resources> 
+    </plugin>
+</plugins>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plugins SYSTEM "http://java.freehep.org/schemas/plugin/1.1/plugin.dtd">
+
+<plugins>
+     <plugin>
+      <information>
+          <name>${project.name}</name>
+          <author>SLAC Jas3 Team</author>
+          <version>${project.version}</version>
+          <description kind="short">Adds support for retrieving records from sources and looping over them.</description>
+          <description>${project.description}</description>
+          <category>common</category>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+          <application minVersion="3.0.4"/>
+      </resources> 
+      <plugin-desc class="org.freehep.jas.extensions.recordloop.RecordLoopPlugin"/>
+    </plugin>
+</plugins>
+

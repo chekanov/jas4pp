@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:pom="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.freehep</groupId>
+    <artifactId>jas-base</artifactId>
+    <version>3.0.12-SNAPSHOT</version>
+  </parent>
+    
+  <artifactId>jas-macosx-plugin</artifactId>
+  <version>3.0.12-SNAPSHOT</version>
+    
+  <name>JAS 3 Mac OSX Plugin</name>
+  <description>Improves system integration under MacOSX</description>
+  
+  <repositories>
+    <repository>
+      <id>freehep-maven2-public</id>
+      <name>Maven FreeHEP</name>
+      <url>http://srs.slac.stanford.edu/nexus/content/groups/freehep-maven2-public/</url>
+    </repository>
+      <repository>
+        <id>java.net-m2</id>
+        <name>java.net - Maven 2</name>
+        <url>https://repository.jboss.org/nexus/content/repositories/java.net-m2</url>
+      </repository>
+  </repositories>
+    
+  <dependencies>
+    <dependency>
+      <groupId>org.freehep</groupId>
+      <artifactId>jas-core</artifactId>
+      <version>${project.parent.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.apple</groupId>
+      <artifactId>AppleJavaExtensions</artifactId>
+      <version>1.4</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+    
+  <build>
+    <plugins>
+      
+      <plugin>
+        <groupId>org.freehep</groupId>
+        <artifactId>freehep-jas-plugin</artifactId>
+        <version>3.1.6</version>
+        <configuration>
+          <redirectUrls>
+            <property>
+              <name>http://srs.slac.stanford.edu/nexus/content/groups/jas-plugin-public/</name>
+              <value>http://srs.slac.stanford.edu/nexus/service/local/artifact/maven/redirect?r=jas-plugin-public</value>
+            </property>
+          </redirectUrls> 
+        </configuration>
+        <executions>
+          <execution>
+            <id>process-descriptor</id>
+            <goals>
+              <goal>process-descriptor</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>org.freehep.jas.mac.MacPlugin</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+    
+</project>

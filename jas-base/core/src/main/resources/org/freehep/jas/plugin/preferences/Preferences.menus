@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE MenuSystem SYSTEM "http://java.freehep.org/schemas/menus/1.1/menus.dtd">
+
+<MenuSystem>
+<MenuBar id="mainMenu">
+    <Menu name="View" mnemonic="F" location="300">
+        <Separator location="950"/>
+        <Component name="Preferences..." command="ShowPreferences" icon="/toolbarButtonGraphics/general/Preferences16.gif"  mnemonic="P" location="960"/>
+    </Menu>
+</MenuBar>
+</MenuSystem>

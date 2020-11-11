@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<document> 
+  <properties>
+    <title>Versions</title> 
+  </properties>
+
+  <body> 
+    <section name="Versions" >
+      <p>
+        Jas 3 versions follow 3.A.B format,
+        where A and B correspond to major and minor version numbers.
+      </p><p>
+        The major version number is incremented when some essential new functionality is added, 
+        or when Jas 3 behavior is changed in a significant and possibly incompatible way.
+        Minor version numbers usually designate maintenance releases - bug fixes and minor improvements.
+      </p><p>
+        Built-in plugins are a part of the Jas 3 core distribution and have the same version number.
+        Extensions and user-written plugins follow their own versioning schemes.
+      </p><p>
+        Before the 3.0.0 release, Jas 3 beta releases followed 0.A.B format.
+      </p>
+    </section>
+  </body>
+</document>

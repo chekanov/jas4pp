@@ -1,0 +1,174 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:pom="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>org.freehep</groupId>
+        <artifactId>jas-base</artifactId>
+        <version>3.1.4</version>
+    </parent>
+    
+    <artifactId>jas-extensions</artifactId>
+    <packaging>pom</packaging>
+    
+    <name>JAS 3 Extensions</name>
+    <description>JAS 3 Extensions</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.freehep</groupId>
+            <artifactId>jas-core</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+   
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.freehep</groupId>
+                <artifactId>freehep-jas-plugin</artifactId>
+                <version>3.1.8</version>
+                <configuration>
+                    <redirectUrls>
+                        <property>
+                            <name>http://srs.slac.stanford.edu/nexus/content/groups/jas-plugin-public/</name>
+                            <value>http://srs.slac.stanford.edu/nexus/service/local/artifact/maven/redirect?r=jas-plugin-public</value>
+                        </property>
+                    </redirectUrls> 
+                </configuration>
+                <executions combine.children="append">
+                    <execution>
+                        <id>process-descriptor</id>
+                        <goals>
+                            <goal>process-descriptor</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>junit:junit</exclude>
+                                <exclude>org.freehep:freehep-application</exclude>
+                                <exclude>org.netbeans:openide-lookup</exclude>
+                                <exclude>jdom:jdom</exclude>
+                                <exclude>javax.help:javahelp</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>install</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.6</version>
+                <reportSets>
+                    <reportSet>
+                        <reports combine.children="append">
+                            <report>index</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+    
+    <profiles>
+      
+        <profile>
+            <id>all-modules</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>Aida</module>
+                <module>Compiler</module>
+               <module>Conditions</module>
+                <module>Excel</module>
+                <module>GraphicsIO</module>
+                <module>HepRep</module>
+                <module>JConsole</module>
+                <module>JMinuit</module>
+                <module>Groovy</module>
+                <module>Jython</module>
+                <module>Pnuts</module> 
+                <module>RecordLoop</module>
+                <module>Root</module>
+                <module>SimpleEditor</module>
+                <module>Spreadsheet</module>
+                <module>StandardSet</module>
+                <module>TupleExplorer</module>
+                <module>TextImport</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>fpad-modules</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>Aida</module>
+                <module>Compiler</module>
+                <module>Excel</module>
+                <module>GraphicsIO</module>
+                <module>HepRep</module>
+                <module>JMinuit</module>
+                <module>Groovy</module>
+                <module>Jython</module>
+                <module>RecordLoop</module>
+                <module>Root</module>
+                <module>SimpleEditor</module>
+                <module>Spreadsheet</module>
+                <module>StandardSet</module>
+                <module>TupleExplorer</module>
+                <module>TextImport</module>
+                <module>JasPlotter</module>
+            </modules>
+        </profile>
+
+
+        <profile>
+            <id>no-extension-modules</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+    
+        <profile>
+            <id>release-profile</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.freehep</groupId>
+                        <artifactId>freehep-jas-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>submit-descriptor</id>
+                                <inherited>true</inherited>
+                                <goals>
+                                    <goal>submit-descriptor</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+      
+    </profiles>
+        
+</project>

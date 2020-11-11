@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-update-child-modules</actionName>
+            <displayName>update-child-modules</displayName>
+            <goals>
+                <goal>versions:update-child-modules</goal>
+                <goal>-DgenerateBackupPoms=false</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-Stage site</actionName>
+            <displayName>Stage site</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+                <goal>site</goal>
+                <goal>site:stage</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>release-profile</activatedProfile>
+                
+            </activatedProfiles>
+        </action>
+        <action>
+            <actionName>CUSTOM-Site Deployment</actionName>
+            <displayName>Site Deployment</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>site</goal>
+                <goal>site:deploy</goal>
+                
+                
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>no-modules</activatedProfile>
+                
+            </activatedProfiles>
+        </action>
+        <action>
+            <actionName>CUSTOM-site without extensions</actionName>
+            <displayName>site without extensions</displayName>
+            <goals>
+                <goal>site</goal>
+                
+                
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>no-modules</activatedProfile>
+                
+            </activatedProfiles>
+        </action>
+        <action>
+            <actionName>CUSTOM-Build Core</actionName>
+            <displayName>Build Core</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>core-only</activatedProfile>
+            </activatedProfiles>
+        </action>
+        <action>
+            <actionName>CUSTOM-Build Assembly</actionName>
+            <displayName>Build Assembly</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>assembly-only</activatedProfile>
+                <activatedProfile>no-extension-modules</activatedProfile>
+            </activatedProfiles>
+        </action>
+        <action>
+            <actionName>CUSTOM-Build Without Extensions</actionName>
+            <displayName>Build Without Extensions</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>no-extension-modules</activatedProfile>
+                
+            </activatedProfiles>
+        </action>
+        
+    </actions>

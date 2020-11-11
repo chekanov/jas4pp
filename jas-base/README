@@ -1,0 +1,18 @@
+Change: ./core/src/main/filtered-resources/org/freehep/jas/JAS3.properties
+
+Welcome:
+./core/src/main/resources/org/freehep/jas/web/welcome.html
+
+Examples:
+./extensions/Jython/src/main/resources/org/freehep/jas/extension/jython/web/examples.html
+
+Startup properties:
+
+freehep/base/freehep-application/target/classes/org/freehep/application/Default.properties
+(freehep)
+
+Splash screen:
+./freehep/base/freehep-application/src/main/resources/org/freehep/application/lg-freehep.gif
+
+Currently it is: jas4pp_300px.png 
+in freehep/base/freehep-application/src/main/resources/org/freehep/application

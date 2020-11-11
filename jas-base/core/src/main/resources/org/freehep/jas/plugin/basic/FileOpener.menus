@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE MenuSystem SYSTEM "http://java.freehep.org/schemas/menus/1.1/menus.dtd">
+
+<MenuSystem>
+<MenuBar id="mainMenu">
+    <Menu name="File" mnemonic="F" location="100">
+        <Component name="Open File..." command="OpenFile" icon="/toolbarButtonGraphics/general/Open16.gif"  mnemonic="O" location="100"/>
+        <Separator location="900"/>
+        <Separator location="950"/>
+    </Menu>
+</MenuBar>
+</MenuSystem>

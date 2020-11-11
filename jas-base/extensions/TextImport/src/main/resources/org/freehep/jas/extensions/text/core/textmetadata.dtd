@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!ELEMENT format EMPTY>
+<!ATTLIST format
+    name  CDATA #REQUIRED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT column (format)*>
+<!ATTLIST column
+   index CDATA #REQUIRED
+    name CDATA #IMPLIED
+    skip CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT columns (column)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT fixed (position)*>
+
+<!ELEMENT position EMPTY>
+<!ATTLIST position
+   index CDATA #REQUIRED
+  >
+
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT delimited (#PCDATA)>
+<!ATTLIST delimited
+    textQualifier CDATA #IMPLIED
+    coalesceDelimiters CDATA #IMPLIED
+    delimiters CDATA #IMPLIED
+    tabIsDelimiter CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT options EMPTY>
+<!ATTLIST options
+    firstDataRow CDATA #IMPLIED
+    columnHeaderRow CDATA #IMPLIED
+    comment CDATA #IMPLIED
+    previewRows CDATA #IMPLIED
+    gzip CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT textmetadata (options?,(fixed|delimited),columns?)>

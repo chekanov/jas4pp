@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="all" name="JAS4PP">
+   <path id="project.class.path">
+      <fileset dir="externalLibs">
+         <include name="*.jar"/>
+      </fileset>
+   </path>
+
+   <target name="buildUtils">
+      <javac debug="false" deprecation="true" destdir="build" srcdir="build" target="1.4" source="1.4">
+         <classpath refid="project.class.path"/>
+      </javac>
+   </target>
+
+   <target depends="buildUtils" name="init">
+      <taskdef name="foreach" classname="org.freehep.jas.build.ForEach">
+         <classpath location="build"/>
+      </taskdef>
+       <!-- Configure the custom Ant tasks for the Manager application -->
+      <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask">
+         <classpath location="externalLibs/build/catalina-ant.jar"/>
+      </taskdef>
+      <taskdef name="list" classname="org.apache.catalina.ant.ListTask">
+         <classpath location="externalLibs/build/catalina-ant.jar"/>
+      </taskdef>
+      <taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask">
+         <classpath location="externalLibs/build/catalina-ant.jar"/>
+      </taskdef>
+      <taskdef name="resources" classname="org.apache.catalina.ant.ResourcesTask">
+         <classpath location="externalLibs/build/catalina-ant.jar"/>
+      </taskdef>
+      <taskdef name="roles" classname="org.apache.catalina.ant.RolesTask">
+         <classpath location="externalLibs/build/catalina-ant.jar"/>
+      </taskdef>
+      <taskdef name="start" classname="org.apache.catalina.ant.StartTask">
+         <classpath location="externalLibs/build/catalina-ant.jar"/>
+      </taskdef>
+      <taskdef name="stop" classname="org.apache.catalina.ant.StopTask">
+         <classpath location="externalLibs/build/catalina-ant.jar"/>
+      </taskdef>
+      <taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask">
+         <classpath location="externalLibs/build/catalina-ant.jar"/>
+      </taskdef>
+
+      <property file="${user.home}/jas3.properties"/>
+      <property name="extraExtensions" value=""/>
+      <property name="extensions" value="RecordLoop,Compiler,SimpleEditor,Pnuts,Aida,Paw,Spreadsheet,Excel,TupleExplorer,GraphicsIO,Jython,Groovy,${extraExtensions}"/>
+      <property name="cp" refid="project.class.path"/>
+      <property name="parentdir" value="${basedir}"/>
+      <property file="version.properties"/>
+      <property name="distDir" value="dist"/>
+      <condition property="isWindows">
+         <os family="windows"/>
+      </condition>
+      <condition property="isMac">
+         <os family="mac"/>
+      </condition>
+      <condition property="isWindowsOrMac">
+         <or>
+            <isset property="isWindows"/>
+            <isset property="isMac"/>
+         </or>
+      </condition>
+      <tstamp/>
+   </target>
+
+   <target depends="init" name="compile">
+      <javac debug="true" deprecation="true" destdir="src" srcdir="src">
+      	 <exclude name="**/examples/**"/>
+         <exclude name="**/*Test.java"/>
+         <exclude name="**/*Suite.java"/>
+         <classpath refid="project.class.path"/>
+      </javac>
+   </target>
+
+   <target depends="init" name="extLibs">
+      <copy file="${FREEHEP}/lib/freehep-base.jar" toFile="externalLibs/freehep-base.jar"/>
+      <copy file="${FREEHEP}/lib/jdom.jar" toFile="externalLibs/jdom.jar"/>
+      <copy file="${FREEHEP}/lib/jlfgr.jar" toFile="externalLibs/jlfgr.jar"/>
+      <copy file="${FREEHEP}/lib/openide-lookup.jar" toFile="externalLibs/openide-lookup.jar"/>
+      <foreach target="extLibsExt" param="extension" list="${extensions}"/>
+   </target>
+   <target depends="init" description="??? Clean an extension directory." name="extLibsExt">
+      <ant antfile="../build-extensions.xml" dir="extensions/${extension}" target="extLibs">
+         <property name="name" value="${extension}"/>
+      </ant>
+   </target>
+
+   <target depends="init" name="doc">
+      <javadoc packagenames="org.freehep.jas.*" sourcepath="src" destdir="api">
+         <classpath refid="project.class.path"/>
+         <link href="http://java.sun.com/j2se/1.4.1/docs/api/"/>
+         <link href="http://java.freehep.org/lib/freehep/api/"/>
+      </javadoc>
+   </target>
+
+   <target depends="init,compile" name="jar">
+      <mkdir dir="lib"/>
+      <buildnumber file="${user.home}/jas3-build.number"/>
+      <dependset>
+         <srcfilelist dir="." files="version.properties"/>
+         <targetfileset dir="tmp/props" includes="**/*.properties"/>
+      </dependset>
+      <copy todir="tmp/props">
+         <fileset dir="src">
+            <include name="**/*.properties"/>
+         </fileset>
+         <filterset>
+            <filter token="DATE" value="${TODAY}"/>
+            <filter token="VERSION" value="${version}"/>
+            <filter token="BUILD" value="${build.number}"/>
+            <filter token="USER" value="${user.name}"/>
+         </filterset>
+      </copy>
+      <jar compress="true" jarfile="lib/jas3.jar">
+         <fileset dir="src">
+            <include name="**/*.class"/>
+            <include name="**/*.html"/>
+            <include name="**/*.xml"/>
+            <include name="**/*.gif"/>
+            <include name="**/*.jpg"/>
+            <include name="**/*.png"/>
+            <include name="**/*.menus"/>
+         </fileset>
+         <fileset dir="tmp/props">
+            <include name="**/*.properties"/>
+         </fileset>
+      </jar>
+   </target>
+
+   <target depends="init,jar" description="Build extensions." name="ext">
+      <foreach target="extExt" param="extension" list="${extensions}"/>
+   </target>
+   <target depends="init" description="??? Clean an extension directory." name="extExt">
+      <ant antfile="../build-extensions.xml" dir="extensions/${extension}" target="rel">
+         <property name="name" value="${extension}"/>
+      </ant>
+   </target>
+    <!-- all -->
+   <target depends="init,rel" description="Build everything." name="all"/>
+    <!-- run -->
+   <target depends="runIfWindows,runIfMac,runIfUnix" description="Try running it." name="run"/>
+   <target depends="all, relWindows" description="Try running it on Windows." name="runWindows">
+      <exec executable="release/bin/jas3.exe" resolveExecutable="true"/>
+   </target>
+   <target depends="all, app-mac" description="Try running it on Mac." name="runMac">
+      <exec executable="chmod">
+         <arg line="+x macosx/jas3.app/Contents/MacOS/JavaApplicationStub"/>
+      </exec>
+      <exec executable="macosx/jas3.app/Contents/MacOS/JavaApplicationStub"/>
+   </target>
+   <target depends="all, relUnix" description="Try running it on Unix." name="runUnix">
+      <exec executable="release/jas3"/>
+   </target>
+   <target depends="init" name="runIfWindows" if="isWindows">
+      <antcall target="runWindows"/>
+   </target>
+   <target depends="init" name="runIfMac" if="isMac">
+      <antcall target="runMac"/>
+   </target>
+   <target depends="init" name="runIfUnix" unless="isWindowsOrMac">
+      <antcall target="runUnix"/>
+   </target>
+   <target depends="init,jar" description="Builds Linux release." name="relUnix">
+      <exec executable="cp">
+         <arg file="unixFrontEnd/jas3"/>
+         <arg file="release"/>
+      </exec>
+      <exec executable="cp">
+         <arg file="unixFrontEnd/jas3.png"/>
+         <arg file="release"/>
+      </exec>
+   </target>
+
+   <target depends="init" description="Clean all build products." name="clean">
+      <delete>
+         <fileset dir="src">
+            <include name="**/*.class"/>
+         </fileset>
+      </delete>
+      <delete dir="lib"/>
+      <delete dir="${distDir}"/>
+      <delete dir="release"/>
+      <delete dir="tmp"/>
+      <delete dir="macosx"/>
+      <delete dir="webstart"/>
+      <delete file="jas3.war"/>
+      <delete dir="apidoc"/>
+      <foreach target="cleanExt" param="extension" list="${extensions}"/>
+   </target>
+
+   <target depends="init" description="Clean an extension directory." name="cleanExt">
+      <ant antfile="../build-extensions.xml" dir="extensions/${extension}" target="clean">
+         <property name="name" value="${extension}"/>
+      </ant>
+   </target>
+
+    <!-- rel Build architecture independent release -->
+   <target depends="init,jar,relExt" description="Builds release." name="rel"/>
+    <!-- relExt Build extensions -->
+   <target depends="init,jar,ext" name="relExt">
+      <copy toDir="release/lib">
+         <fileset dir="externalLibs" includes="*.jar"/>
+         <fileset dir="lib" includes="*.jar"/>
+      </copy>
+   </target>
+   <target depends="init,jar,relExt,ext" description="Builds Windows release." name="relWindows">
+      <copy toDir="release/bin">
+         <fileset dir="externalLibs/win32-vc"/>
+         <fileset dir="winFrontEnd/bin"/>
+      </copy>
+      <copy toDir="release" file="winFrontEnd/jas.ini"/>
+   </target>
+    <!-- dist-linux -->
+   <target depends="rel" name="dist-linux">
+      <mkdir dir="${distDir}"/>
+      <mkdir dir="tmp"/>
+      <fixcrlf eol="lf" srcDir="unixFrontEnd" destDir="tmp"/>
+      <tar tarfile="${distDir}/jas3-Linux-${version}.tar.gz" compression="gzip">
+         <tarfileset dir="release" prefix="jas3-${version}">
+            <include name="extensions/*.jar"/>
+            <include name="lib/*.jar"/>
+         </tarfileset>
+         <tarfileset dir="tmp" prefix="jas3-${version}" mode="755">
+            <include name="jas3"/>
+         </tarfileset>
+	 <tarfileset dir="unixFrontEnd" prefix="jas3-${version}">
+	    <include name="jas3.png"/>
+	 </tarfileset>
+         <tarfileset dir="externalLibs/Linux-g++" prefix="jas3-${version}/bin">
+            <include name="*.so"/>
+         </tarfileset>
+      </tar>
+   </target>
+    <!-- dist-solaris -->
+   <target depends="rel" name="dist-solaris">
+      <mkdir dir="${distDir}"/>
+      <mkdir dir="tmp"/>
+      <fixcrlf eol="lf" srcDir="unixFrontEnd" destDir="tmp"/>
+      <tar tarfile="${distDir}/jas3-Solaris-${version}.tar.gz" compression="gzip">
+         <tarfileset dir="release" prefix="jas3-${version}">
+            <include name="extensions/*.jar"/>
+            <include name="lib/*.jar"/>
+         </tarfileset>
+         <tarfileset dir="tmp" prefix="jas3-${version}" mode="755">
+            <include name="jas3"/>
+         </tarfileset>
+	 <tarfileset dir="unixFrontEnd" prefix="jas3-${version}">
+	    <include name="jas3.png"/>
+	 </tarfileset>
+         <tarfileset dir="externalLibs/SUN-CC" prefix="jas3-${version}/bin">
+            <include name="*.so"/>
+         </tarfileset>
+      </tar>
+   </target>
+    <!-- dist-generic -->
+   <target depends="rel" name="dist-generic">
+      <mkdir dir="${distDir}"/>
+      <mkdir dir="tmp"/>
+      <fixcrlf eol="lf" srcDir="unixFrontEnd" destDir="tmp"/>
+      <tar tarfile="${distDir}/jas3-GenericUnix-${version}.tar.gz" compression="gzip">
+         <tarfileset dir="release" prefix="jas3-${version}">
+            <include name="extensions/*.jar"/>
+            <include name="lib/*.jar"/>
+         </tarfileset>
+         <tarfileset dir="tmp" prefix="jas3-${version}" mode="755">
+            <include name="jas3"/>
+         </tarfileset>
+	 <tarfileset dir="unixFrontEnd" prefix="jas3-${version}">
+	    <include name="jas3.png"/>
+	 </tarfileset>
+      </tar>
+   </target>
+    <!-- dist-win -->
+   <target depends="init,relWindows" description="Build .msi file" name="dist-win">
+      <taskdef name="uuidgen" classname="org.freehep.jas.build.UUIDGen">
+         <classpath location="build"/>
+      </taskdef>
+      <uuidgen property="uuid1"/>
+      <uuidgen property="uuid2"/>
+      <delete dir="tmp"/>
+      <copy todir="tmp">
+         <fileset dir="winInstaller"></fileset>
+         <filterset>
+            <filter token="UUID1" value="{${uuid1}}"/>
+            <filter token="UUID2" value="{${uuid2}}"/>
+            <filter token="DATE" value="${TODAY}"/>
+            <filter token="VERSION" value="${version}"/>
+            <filter token="BUILD" value="${build.number}"/>
+            <filter token="USER" value="${user.name}"/>
+         </filterset>
+      </copy>
+      <exec executable="cmd" dir="tmp">
+         <arg line="/c devenv jas3.sln /build debug"/>
+      </exec>
+      <mkdir dir="${distDir}"/>
+      <copy file="tmp/Debug/JAS3-${version}.msi" toFile="${distDir}/JAS3-Windows-${version}.msi"/>
+   </target>
+   <target depends="init,dist-win,dist-mac,dist-linux,dist-solaris,dist-generic" name="dist"/>
+   <target depends="init,all" description="Build WebStart app" name="jnlp">
+      <mkdir dir="webstart"/>
+      <copy toDir="webstart/jars">
+         <fileset dir="release/lib"/>
+         <fileset dir="release/extensions">
+           <exclude name="PawPlugin.jar"/>
+           <exclude name="jython.jar"/>
+           <exclude name="JythonPlugin.jar"/>
+         </fileset>
+         </copy>
+      <copy toDir="webstart/jars/macosx">
+         <fileset dir="macosxFrontEnd"> 
+           <include name="MacOSXPlugin.jar"/>
+         </fileset>
+      </copy>
+      <copy toDir="webstart">
+         <fileset dir="web">
+            <exclude name="jas3.jnlp"/>
+         </fileset>
+      </copy>
+      <copy toDir="webstart">
+         <fileset dir="web">
+            <include name="jas3.jnlp"/>
+         </fileset>
+         <filterset>
+            <filter token="DATE" value="${TODAY}"/>
+            <filter token="VERSION" value="${version}"/>
+            <filter token="BUILD" value="${build.number}"/>
+            <filter token="USER" value="${user.name}"/>
+         </filterset>
+      </copy>
+      <java className="org.freehep.jas.build.JNLPMangler">
+         <arg value="webstart/jas3.jnlp"/>
+         <classpath>
+            <pathelement location="build"/>
+            <pathelement location="externalLibs/jdom.jar"/>
+            <pathelement path="${java.class.path}"/>
+         </classpath>
+      </java>
+      <signjar lazy="true" alias="${alias}" keypass="${keypass}" keystore="${keystore}" storepass="${storepass}">
+         <fileset dir="webstart/jars/"/>
+      </signjar>
+   </target>
+   <target depends="jnlp" name="war">
+      <war basedir="webstart" warfile="jas3.war" webxml="web/web.xml">
+         <lib dir="ExternalLibs/servlet" includes="jnlp-servlet.jar"/>
+      </war>
+   </target>
+   <target name="deploy" description="Install web application" depends="war">
+    <deploy url="${appserver}" username="${user}" password="${password}"
+            path="${warpath}" war="jas3.war" update="true"/>
+   </target>
+    <!-- app-mac -->
+   <target name="app-mac" depends="init">
+      <property name="appdir" value="macosx/jas3.app"/>
+      <mkdir dir="${appdir}"/>
+      <mkdir dir="${appdir}/Contents"/>
+      <mkdir dir="${appdir}/Contents/MacOS"/>
+      <mkdir dir="${appdir}/Contents/Resources"/>
+      <mkdir dir="${appdir}/Contents/Resources/Java"/>
+      <copy file="macosxFrontEnd/JavaApplicationStub" todir="${appdir}/Contents/MacOS/"/>
+      <copy file="macosxFrontEnd/Info.plist" todir="${appdir}/Contents">
+         <filterset>
+            <filter token="DATE" value="${TODAY}"/>
+            <filter token="VERSION" value="${version}"/>
+            <filter token="BUILD" value="${build.number}"/>
+            <filter token="USER" value="${user.name}"/>
+         </filterset>
+      </copy>
+      <copy file="macosxFrontEnd/client.icns" todir="${appdir}/Contents/Resources"/>
+      <copy file="macosxFrontEnd/MacOSXPlugin.jar" todir="${appdir}/Contents/Resources/extensions"/>
+      <copy todir="${appdir}/Contents/Resources/Java">
+         <fileset dir="release/lib">
+            <include name="*.jar"/>
+         </fileset>
+         <fileset dir="externalLibs/Darwin-g++">
+            <include name="*.jnilib"/>
+         </fileset>
+      </copy>
+      <copy todir="${appdir}/Contents/Resources/extensions">
+         <fileset dir="release/extensions">
+            <include name="*.jar"/>
+         </fileset>
+      </copy>
+   </target>
+    <!-- dist-mac -->
+   <target name="dist-mac" depends="init,app-mac">
+      <mkdir dir="${distDir}"/>
+      <tar tarfile="${distDir}/jas3-MacOSX-${version}.tar.gz" compression="gzip">
+         <tarfileset dir="macosx" prefix="jas3-${version}">
+            <exclude name="**/JavaApplicationStub"/>
+         </tarfileset>
+         <tarfileset dir="macosx" prefix="jas3-${version}" mode="755">
+            <include name="jas3.app/Contents/MacOS/JavaApplicationStub"/>
+         </tarfileset>
+      </tar>
+   </target>
+</project>

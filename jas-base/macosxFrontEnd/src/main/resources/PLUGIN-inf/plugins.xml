@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plugins SYSTEM "http://java.freehep.org/schemas/plugin/1.1/plugin.dtd">
+
+<plugins>
+    <plugin>
+      <information>
+          <name>MacPlugin</name>
+          <author>Tony Johnson</author>
+          <version>${project.version}</version>
+          <description kind="short">Improves system integration under MacOSX</description>
+          <description>Improves system integration under MacOSX</description>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="1.4"/>
+      </resources> 
+      <plugin-desc class="org.freehep.jas.mac.MacPlugin"/>
+    </plugin>
+</plugins>
+

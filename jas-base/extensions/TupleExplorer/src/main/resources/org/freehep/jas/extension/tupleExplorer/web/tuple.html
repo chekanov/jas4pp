@@ -1,0 +1,178 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Tuples</title>
+<style>
+<!--
+span.limitation { color: #008000; font-variant: small-caps }
+-->
+</style>
+</head>
+
+<body>
+
+<h1>JAS Tuple Explorer</h1>
+<h2>Contents</h2>
+<ul>
+  <li>
+  <a href="#Introduction">
+  Introduction</a> </li>
+  <li>
+  <a href="#Instructions">
+  Usage Instructions</a> </li>
+  <li>
+  <a href="future_plans.html">Future plans</a></li>
+</ul>
+<h2><a name="Introduction">Introduction</a></h2>
+<p>The JAS Tuple Explorer is a tool for creating plots from tabular data (or N-tuples). 
+It is particularly well suited to statistical analysis of large tables (with 
+1,000s or 1,000,000s of rows). The main features are:</p>
+<ul>
+  <li>Many Data Formats Supported
+  <ul>
+    <li>SQL database </li>
+    <li>ASCII text files </li>
+    <li>PAW files </li>
+    <li>Root files </li>
+  </ul>
+  </li>
+  <li>Support for very large N-tuples (larger than will fit in memory) </li>
+  <li>Columns may be int, float, double, boolean, String, Date, Object
+  <ul>
+    <li>Allows new columns to be defined on the fly </li>
+  </ul>
+  </li>
+  <li>Built-in expression compiler/evaluator </li>
+  <li>1D, 2D histograms, profile plots, scatterplots, lego plots, surface plots, 
+  color plots. </li>
+  <li>Multiple overlays on same plot </li>
+  <li>Dynamic cuts - based on expressions or sliders </li>
+  <li>Tabulation of data </li>
+  <li>Plots and Cuts can be arranged on page
+  <ul>
+    <li>Drag and drop for easy page building </li>
+  </ul>
+  </li>
+  <li>Entire status of interface saved in human-readable/editable XML format
+  </li>
+  <li>System is modular and extensible, easy to add:
+  <ul>
+    <li>New data formats </li>
+    <li>New cut types </li>
+    <li>New plot types </li>
+  </ul>
+  </li>
+</ul>
+<h2><a name="Instructions">Instructions</a></h2>
+<p>Text in <span class="limitation">green</span> indicates limitations which 
+will be removed soon in future releases.</p>
+<h3>Open and Closing Data Sets</h3>
+<p>To open a dataset you can either use <i>File</i>, <i>Open File</i> menu item. 
+You can currently open text files, SQL databases (using JDBC) as well as Paw 
+files and Root files (written with Root 3.00/6 or later).
+<span class="limitation">Currently all NTuples are read in to memory when they 
+are opened, so for large data sources this may take some time (and even worse 
+you may run out of memory.)</span> </p>
+<p>Once you have opened a file any NTuples found in the file will be displayed 
+in the tree on the right of the window. To close an NTuple select it in the tree 
+and use the <i>File</i>, <i>Close</i> menu.</p>
+<h3>Creating a Plot</h3>
+<p>The easiest way to create a plot is to double-click on the column to be 
+plotted in the tree. This will create a Histogram of the column selected. 
+Alternatively you can choose two columns and use the <i>Histogram</i>, <i>
+Scatter Plot</i> or <i>Profile Plot</i> commands in the Tuple menu. When 
+selecting two or more columns the order of the selection is important, for 
+example when creating 2D plots it determines which items will appear on the X 
+and Y axes. <span class="limitation">In future we will have a Create Plot 
+command which will allow much more flexibility in creating plots.</span></p>
+<p>You can make many changes to the style and limits of the plot using the popup 
+menu available by right-clicking on the plot. You can also perform fits using 
+this menu.</p>
+<h3>Defining New Columns</h3>
+<p>You can define new columns dynamically which are derived from the information 
+in the existing columns. Select an N-Tuple in the tree, and then choose <i>Tuple</i>,
+<i>Define New Column</i>. </p>
+<p align="center">
+<img src="images/defaul1.jpg" border="0" width="442" height="126"></p>
+<p>Enter the name for the new column in the top text field, and enter the 
+expression to evaluate in the lower text field. The expression can use the names 
+of other columns directly, and any of the common math functions (for a complete 
+list see the <a href="http://java.sun.com/j2se/1.3/docs/api/java/lang/Math.html">
+java.lang.Math</a> class). For example if your N-Tuple contains columns X and Y 
+you can define a new column using the expression:</p>
+<p align="center">sqrt(X*X+Y*Y)</p>
+<p align="left">Note that items in the expression are case sensitive. 
+Right-clicking in the expression field will bring up a popup menu that&nbsp; you can 
+use to easily insert references to columns. The expressions use normal Java 
+syntax (which in basically the same as C syntax).</p>
+<p align="left">For columns that contain Strings or Dates you can use methods 
+from the <a href="http://java.sun.com/j2se/1.3/docs/api/java/lang/String.html">
+java.lang.String</a> class and
+<a href="http://java.sun.com/j2se/1.3/docs/api/java/lang/Date.html">
+java.lang.Date</a> class. For example:</p>
+<p align="center">Nation.toLowerCase()</p>
+<h3>Creating cuts</h3>
+<p>Cuts allow you to reject some columns of the N-tuple from your plots. To 
+create a new cut select an N-Tuple in the tree, the choose <i>Tuple</i>, <i>Add 
+Cut</i>.</p>
+<p align="center">
+<img src="images/defaul2.jpg" border="0" width="401" height="251"></p>
+<p>Currently there are two types of cuts you can create, a numeric cut or a 
+general cut. Numeric cuts can only be applied to numeric columns. They allow you 
+to use sliders to rapidly change the cut thresholds and see how this effects you 
+plots. General cuts allow you to use boolean expressions to accept or reject 
+columns. Unlike numeric cuts they can be applied to multiple columns and can 
+work on non-numeric columns. After creating a cut it will appear as a new column 
+in your N-Tuple. Double-click on the column to change the cut, or to change the 
+sliders. </p>
+<p><span class="limitation">More cut types will be added later. </span></p>
+<h3>Cut Sets</h3>
+<p>By default all cuts are applied to all plots. This can be adjusted by using 
+Cut Sets. By default a single Cut Set is created for each N-Tuple, called the <i>
+Default Cut Set</i>. All cuts are added to the default cut set as they are 
+created. The default cut set is applied to all new plots as they are created.</p>
+<p>You can view the contents of the default cut set by selecting an N-Tuple in 
+the tree, and then selecting <i>Tuple</i>, <i>Show Default Cut Set</i>. </p>
+<p align="center">
+<img src="images/defaul3.jpg" border="0" width="467" height="278"></p>
+<p align="left">Using this dialog you can add and remove cuts from the default 
+cut set, and can also invert or disable individual cuts. </p>
+<p align="left">You can create any number of Cut Sets using the <i>Tuple</i>, <i>
+Add Cut</i> command, and can add and remove cuts from them by double-clicking on 
+the column representing the Cut Set in the tree. Cut sets can be nested inside 
+other cut sets. <span class="limitation">The Add and Remove buttons in the Add 
+Cut Dialog, Cut Set tab do not currently work. You must create the cut, then 
+double click on it to bring up its properties dialog, and add and remove items 
+from that dialog.</span></p>
+<p align="left">You can change the cuts which are applied to a particular plot 
+by right clicking on the plot, and choose <i>Cuts</i> from the popup menu. Each 
+plot has its own (anonymous) cut set, which by default contains the Default Cut 
+Set. You can remove the Default Cut Set and add or remove any other cuts you 
+want (note however that making changes to the Default Cut Set itself will effect 
+all plots to which it is applied).</p>
+<h3>Tabulating Data</h3>
+<p>You can tabulate a complete N-Tuple by selecting the N-Tuple in the tree and 
+choosing <i>Tuple</i>, <i>Tabulate</i>. You can tabulate selected columns of the 
+N-Tuple by selecting those columns and choosing <i>Tuple</i>, <i>Tabulate 
+Selected Columns</i>. The columns will be placed in the table in the order in 
+which they were selected. You can change the order by dragging on the column 
+headers.</p>
+<h3>Working with Pages</h3>
+<p>You can create any number of pages using the <i>File</i>, <i>New, Plot Page</i> 
+command. You can &quot;drag &amp; drop&quot; columns of the NTuple into the page to create 
+plots. If you drop multiple columns onto the same plot they will be overlaid on 
+the same plot. You can also drag cuts on to the page. <span class="limitation">
+&nbsp;It is not currently possible to drag 2D plots on to the page. </span>You can 
+move items around on the page by clicking on them, and then dragging on the blue 
+border. </p>
+<p>You can print pages using the <i>Print</i> (or <i>Print Preview</i>) commands 
+in the <i>File</i> menu. <span class="limitation">In future more flexibility 
+over the size and style of pages will be provided.</span></p>
+
+</body>
+
+</html>

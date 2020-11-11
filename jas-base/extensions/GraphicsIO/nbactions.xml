@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-Submit Plugin Descriptor</actionName>
+            <displayName>Submit Plugin Descriptor</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+                <goal>org.freehep:freehep-jas-plugin:submit-descriptor</goal>
+            </goals>
+        </action>
+    </actions>

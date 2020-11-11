@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE MenuSystem SYSTEM "http://java.freehep.org/schemas/menus/1.1/menus.dtd">
+
+<MenuSystem>
+  <MenuBar id="mainMenu">
+    <Menu name="Loop" mnemonic="R" location="500">
+      <Component name="Rewind" icon="/toolbarButtonGraphics/media/Rewind16.gif" command="rewind" mnemonic="W">
+<!--        <Accelerator key="VK_F4" command="false"></Accelerator>-->
+      </Component>
+      <Component name="Previous" icon="/toolbarButtonGraphics/media/StepBack16.gif" command="prev" mnemonic="V">
+<!--        <Accelerator key="VK_F5" command="false"></Accelerator>-->
+      </Component>
+      <Component name="Pause" icon="/toolbarButtonGraphics/media/Pause16.gif" command="pause" mnemonic="P">
+<!--        <Accelerator key="VK_F6" command="false"></Accelerator>-->
+      </Component>
+      <Component name="Next" icon="/toolbarButtonGraphics/media/StepForward16.gif" command="next" mnemonic="X">
+<!--        <Accelerator key="VK_F7" command="false"></Accelerator>-->
+      </Component>
+      <Component name="Go N ..." icon="/toolbarButtonGraphics/media/FastForward16.gif" command="goN" mnemonic="N">
+<!--        <Accelerator key="VK_F8" command="false"></Accelerator>-->
+      </Component>
+      <Component name="Go" icon="/toolbarButtonGraphics/media/Play16.gif" command="go" mnemonic="G">
+<!--        <Accelerator key="VK_F9" command="false"></Accelerator>-->
+      </Component>
+      <Component name="Jump ..." icon="/toolbarButtonGraphics/general/Find16.gif" command="jump" mnemonic="J">
+<!--        <Accelerator key="VK_F10" command="false"></Accelerator>-->
+      </Component>
+      <Component name="Refresh" icon="/toolbarButtonGraphics/general/Refresh16.gif" command="refresh" mnemonic="R">
+<!--        <Accelerator key="VK_F11" command="false"></Accelerator>-->
+      </Component>
+      <Component name="Stop" icon="/toolbarButtonGraphics/media/Stop16.gif" command="stop" mnemonic="S">
+<!--        <Accelerator key="VK_F12" command="false"></Accelerator>-->
+      </Component>
+      <Separator />
+      <Component name="Preferences..." command="pref" mnemonic="F">
+      </Component>
+    </Menu>
+  </MenuBar>
+  <ToolBar id="recordLoop" name="Record Loop">
+      <Component name="Rewind" icon="/toolbarButtonGraphics/media/Rewind16.gif" command="rewind" mnemonic="W">
+      </Component>
+      <Component name="Previous" icon="/toolbarButtonGraphics/media/StepBack16.gif" command="prev" mnemonic="V">
+      </Component>
+      <Component name="Pause" icon="/toolbarButtonGraphics/media/Pause16.gif" command="pause" mnemonic="P">
+      </Component>
+      <Component name="Next" icon="/toolbarButtonGraphics/media/StepForward16.gif" command="next" mnemonic="X">
+      </Component>
+      <Component name="Go N ..." icon="/toolbarButtonGraphics/media/FastForward16.gif" command="goN" mnemonic="N">
+      </Component>
+      <Component name="Go" icon="/toolbarButtonGraphics/media/Play16.gif" command="go" mnemonic="G">
+      </Component>
+      <Component name="Jump ..." icon="/toolbarButtonGraphics/general/Find16.gif" command="jump" mnemonic="J">
+      </Component>
+      <Component name="Refresh" icon="/toolbarButtonGraphics/general/Refresh16.gif" command="refresh" mnemonic="R">
+      </Component>
+      <Component name="Stop" icon="/toolbarButtonGraphics/media/Stop16.gif" command="stop" mnemonic="S">
+      </Component>
+  </ToolBar>
+</MenuSystem>

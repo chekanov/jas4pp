@@ -1,0 +1,27 @@
+IAnalysisFactory = class hep.aida.IAnalysisFactory
+af = IAnalysisFactory::create()
+
+Random = class java.util.Random
+r = Random()
+
+tree = af.createTreeFactory().create();
+hf = af.createHistogramFactory(tree);
+      
+cl1D = hf.createCloud1D( "cl1D", "1-Dimensional Cloud", 1500, "" );
+cl2D = hf.createCloud2D( "cl2D", "2-Dimensional Cloud", 1500, "" );
+      
+for (i = 0; i < 20000; i++ )
+{
+   xval = r.nextGaussian();
+   yval = r.nextGaussian();
+   w    = r.nextDouble();
+         
+   cl1D.fill( xval, w );
+   cl2D.fill( xval, yval, w );
+}
+            
+plotter = af.createPlotterFactory().create("Cloud.pnut plot");
+plotter.createRegions(1,2,0);
+plotter.region(0).plot(cl1D);
+plotter.region(1).plot(cl2D);
+plotter.show();

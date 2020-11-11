@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="all" name="JAS Extension">
+    <target name="extLibs">
+        <copy file="${FREEHEP}/lib/freehep-graphics2d.jar" toFile="externalLibs/freehep-graphics2d.jar"/>
+	<copy file="${FREEHEP}/lib/freehep-graphicsio.jar" toFile="externalLibs/freehep-graphicsio.jar"/>
+	<copy file="${FREEHEP}/lib/freehep-graphicsio-cgm.jar" toFile="externalLibs/freehep-graphicsio-cgm.jar"/>
+	<copy file="${FREEHEP}/lib/freehep-graphicsio-emf.jar" toFile="externalLibs/freehep-graphicsio-emf.jar"/>
+	<copy file="${FREEHEP}/lib/freehep-graphicsio-gif.jar" toFile="externalLibs/freehep-graphicsio-gif.jar"/>
+	<copy file="${FREEHEP}/lib/freehep-graphicsio-pdf.jar" toFile="externalLibs/freehep-graphicsio-pdf.jar"/>
+	<copy file="${FREEHEP}/lib/freehep-graphicsio-ppm.jar" toFile="externalLibs/freehep-graphicsio-ppm.jar"/>
+	<copy file="${FREEHEP}/lib/freehep-graphicsio-ps.jar" toFile="externalLibs/freehep-graphicsio-ps.jar"/>
+	<copy file="${FREEHEP}/lib/freehep-graphicsio-svg.jar" toFile="externalLibs/freehep-graphicsio-svg.jar"/>
+	<copy file="${FREEHEP}/lib/freehep-graphicsio-swf.jar" toFile="externalLibs/freehep-graphicsio-swf.jar"/>
+        </target>
+</project>

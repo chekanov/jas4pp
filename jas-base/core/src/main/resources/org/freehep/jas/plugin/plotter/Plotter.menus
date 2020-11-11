@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE MenuSystem SYSTEM "http://java.freehep.org/schemas/menus/1.1/menus.dtd">
+
+<MenuSystem>
+    <MenuBar id="mainMenu">
+        <Menu name="File" mnemonic="F" location="100">
+            <Menu name="New" mnemonic="N" location="50">
+                <Component type="default" name="Plot Page" mnemonic="P" command="newPlotPage"  location="300"/>
+            </Menu>
+            <Separator location="700"/>
+            <Component name="Print Setup..." icon="/toolbarButtonGraphics/general/PageSetup16.gif" command="printSetup" mnemonic="P" location="720">
+            </Component>            
+            <Component name="Print" icon="/toolbarButtonGraphics/general/Print16.gif" command="print" mnemonic="P" location="750">
+                <Accelerator key="VK_P"/>
+            </Component>
+            <Component name="Print Preview..." icon="/toolbarButtonGraphics/general/PrintPreview16.gif" command="printPreview" mnemonic="P" location="760">
+                <Accelerator key="VK_P" shift="true"/>
+            </Component>
+        </Menu>
+    </MenuBar>
+    <PopupMenu id="PlotPagePopupMenu" name="Plot Page Popup Menu">
+           <Component name="Show Regions" mnemonic="S" command="showRegions" type="checkbox"/>
+           <Menu name="Set Regions" mnemonic="R">
+              <Component name="1x1" command="regions_1_1"/>
+              <Component name="2x1" command="regions_2_1"/>
+              <Component name="1x2" command="regions_1_2"/>
+              <Component name="2x2" command="regions_2_2"/>
+              <Component name="1x3" command="regions_1_3"/>
+              <Component name="2x3" command="regions_2_3"/>
+              <Component name="3x3" command="regions_3_3"/>
+              <Component name="4x4" command="regions_4_4"/>
+              <Component name="nxm" command="regions_n_m"/>
+           </Menu> 
+           <Component name="Merge Selected Regions" mnemonic="M" command="mergeRegions"/>
+           <Component name="Split Selected Region" mnemonic="S" command="splitRegion"/>
+           <Component name="Clear All Regions" command="clearAllRegions"/>
+    </PopupMenu>
+</MenuSystem>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Java Analysis Studio 3">
+
+  <bannerLeft>
+    <name>Jas 3</name>
+    <src>images/jas3Title.png</src>
+    <href>http://jas.freehep.org/</href>
+  </bannerLeft>
+  <bannerRight>
+    <name>FreeHEP</name>
+    <src>http://java.freehep.org/images/sm-freehep.gif</src>
+    <href>http://java.freehep.org/</href>
+  </bannerRight>
+    
+  <body>
+    
+    <head>
+      <meta name="keyword" content="jas, jas3, wired, wired4, interactive, analysis, framework, software, hep, heprep, lcio, lcsim, java, studio" />
+    </head>
+    
+    <links>
+      <item name="FreeHEP" href="http://java.freehep.org/"/>
+      <item name="AIDA" href="http://aida.freehep.org/"/>
+      <item name="JAIDA" href="http://java.freehep.org/jaida/"/>
+      <item name="AIDA Tag Library" href="http://aidatld.freehep.org/"/>
+      <item name="WIRED 4" href="http://wired.freehep.org/"/>
+    </links>
+        
+    <menu name="Jas 3" inherit="bottom">
+      <item href="index.html" name="Overview"/>
+      <item href="Download.html" name="Download"/>
+      <item href="ReleaseNotes.html" name="Release Notes"/>
+      <item href="license.html" name="License"/>
+    </menu>
+               
+    <menu name="Documentation" inherit="bottom">
+      <item href="https://confluence.slac.stanford.edu/display/JAS3/Home" name="Jas3 Confluence Pages"/>
+      <item href="issue-tracking.html" name="Issue Tracking"/>
+      <item href="Versions.html" name="Versions"/>
+      <item href="source-repository.html" name="Source Code"/>
+      <item href="jas-core/dependencies.html" name="Dependencies"/>
+      <item href="jas-core/apidocs/index.html" name="API"/>
+    </menu>
+
+    <menu name="Extensions" inherit="bottom">
+      <item href="jas-extensions/jas-simple-editor" name="Simple Editor"/>
+      <item href="jas-extensions/jas-record-loop" name="Record Loop"/>
+      <item href="jas-extensions/jas-aida-plugin" name="AIDA plugin"/>
+      <item href="jas-extensions/jas-jython" name="Jython Plugin"/>
+      <item href="jas-extensions/jas-groovy" name="Groovy Plugin"/>
+      <item href="jas-extensions/jas-pnuts" name="Pnuts Plugin"/>
+      <item href="jas-extensions/jas-compiler" name="Compiler Plugin"/>
+      <item href="jas-extensions/jas-tuple-explorer" name="Tuple Explorer"/>
+      <item href="jas-extensions/jas-root" name="Root Plugin"/>
+      <item href="jas-extensions/jas-graphicsio" name="Graphisc IO"/>
+      <item href="jas-extensions/jas-spreadsheet" name="Spreadsheet"/>
+      <item href="jas-extensions/jas-excel-io" name="Excel Support"/>
+      <item href="jas-extensions/jas-heprep" name="HepRep Plugin"/>
+      <item href="jas-extensions/jas-jminuit" name="JMinuit Fitter"/>
+    </menu>
+    
+  </body>
+</project>

@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:pom="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.freehep</groupId>
+        <artifactId>jas-extensions</artifactId>
+        <version>3.1.0</version>
+    </parent>
+
+    <groupId>org.freehep</groupId>
+    <artifactId>jas-compiler</artifactId>
+    <name>JAS 3 Compiler plugin</name>
+    <version>1.2.6-SNAPSHOT</version>
+    <description>Adds an ability to open and compile Java files.</description>
+    
+    <repositories>
+        <repository>
+            <id>freehep-maven2-public</id>
+            <name>Maven FreeHEP</name>
+            <url>http://srs.slac.stanford.edu/nexus/content/groups/freehep-maven2-public/</url>
+        </repository>
+    </repositories>
+    
+    <pluginRepositories>
+        <pluginRepository>
+            <id>freehep-maven2-public</id>
+            <name>Maven FreeHEP</name>
+            <url>http://srs.slac.stanford.edu/nexus/content/groups/freehep-maven2-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <scm>
+        <url>svnFreehepRepo</url>
+        <connection>scm:svn:svn://svn.freehep.org/svn/jas/trunk/extensions/Compiler</connection>
+        <developerConnection>scm:svn:svn://svn.freehep.org/svn/jas/trunk/extensions/Compiler</developerConnection>
+    </scm>
+
+</project>

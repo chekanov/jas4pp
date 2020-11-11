@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE attributes PUBLIC "-//NetBeans//DTD DefaultAttributes 1.0//EN" "http://www.netbeans.org/dtds/attributes-1_0.dtd">
+<attributes version="1.0">
+    <fileobject name="ColumnTableModel.java">
+        <attr name="class_dependency_javax.swing.table.AbstractTableModel" stringvalue="ColumnTableModel"/>
+    </fileobject>
+    <fileobject name="DelimitersPage.java">
+        <attr name="class_dependency_java.beans.PropertyChangeListener" stringvalue="DelimitersPage"/>
+        <attr name="class_dependency_org.freehep.swing.wizard.HasNextPages" stringvalue="DelimitersPage"/>
+        <attr name="class_dependency_org.freehep.swing.wizard.WizardPage" stringvalue="DelimitersPage"/>
+    </fileobject>
+    <fileobject name="FilePreviewModel.java">
+        <attr name="class_dependency_javax.swing.table.AbstractTableModel" stringvalue="FilePreviewModel"/>
+    </fileobject>
+    <fileobject name="FirstPage.java">
+        <attr name="class_dependency_javax.swing.table.DefaultTableCellRenderer" stringvalue="FirstPage.RowHeaderRenderer"/>
+        <attr name="class_dependency_org.freehep.swing.wizard.HasNextPages" stringvalue="FirstPage"/>
+        <attr name="class_dependency_org.freehep.swing.wizard.WizardPage" stringvalue="FirstPage"/>
+    </fileobject>
+    <fileobject name="GUIUtilities.java">
+        <attr name="class_dependency_org.freehep.jas.extensions.text.core.TextUtilities" stringvalue="GUIUtilities"/>
+    </fileobject>
+    <fileobject name="PreviewModel.java">
+        <attr name="class_dependency_java.beans.PropertyChangeListener" stringvalue="PreviewModel"/>
+        <attr name="class_dependency_javax.swing.table.AbstractTableModel" stringvalue="PreviewModel"/>
+    </fileobject>
+    <fileobject name="PreviewTable.java">
+        <attr name="class_dependency_javax.swing.JTable" stringvalue="PreviewTable"/>
+    </fileobject>
+    <fileobject name="StartPage.java">
+        <attr name="class_dependency_javax.swing.event.ChangeListener" stringvalue="StartPage"/>
+        <attr name="class_dependency_org.freehep.swing.wizard.HasNextPages" stringvalue="StartPage"/>
+        <attr name="class_dependency_org.freehep.swing.wizard.WizardPage" stringvalue="StartPage"/>
+    </fileobject>
+    <fileobject name="TypePage.java">
+        <attr name="class_dependency_javax.swing.DefaultListCellRenderer" stringvalue="TypePage.MyComboRenderer"/>
+        <attr name="class_dependency_javax.swing.JComboBox" stringvalue="TypePage.MyComboBoxRenderer"/>
+        <attr name="class_dependency_javax.swing.event.ListSelectionListener" stringvalue="TypePage"/>
+        <attr name="class_dependency_javax.swing.table.TableCellRenderer" stringvalue="TypePage.MyComboBoxRenderer"/>
+        <attr name="class_dependency_org.freehep.swing.wizard.Finishable" stringvalue="TypePage"/>
+        <attr name="class_dependency_org.freehep.swing.wizard.WizardPage" stringvalue="TypePage"/>
+    </fileobject>
+</attributes>

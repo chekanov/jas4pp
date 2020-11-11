@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plugins SYSTEM "http://java.freehep.org/schemas/plugin/1.1/plugin.dtd">
+
+<plugins>
+     <plugin>
+      <information>
+          <name>Text Import</name>
+          <author>SLAC Jas3 Team</author>
+          <version>${project.version}</version>
+          <description kind="short">Adds support for reading text files with data (.csv files, for example).</description>
+          <description>${project.description}</description>
+          <category>io</category>
+          <load-at-start/> 
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+          <application minVersion="3.0.4"/>
+          <depends plugin="JAS 3 AIDA Plugin" minVersion="3.3.6" />
+          <depends plugin="JAS 3 Record Loop" minVersion="2.1.4" />
+          <depends plugin="JAS 3 Tuple Explorer" minVersion="2.2.3" />
+      </resources> 
+      <plugin-desc class="org.freehep.jas.extensions.text.TextPlugin"/>
+    </plugin>
+</plugins>
+

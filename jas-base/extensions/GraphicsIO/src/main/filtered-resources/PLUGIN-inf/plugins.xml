@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plugins SYSTEM "http://java.freehep.org/schemas/plugin/1.1/plugin.dtd">
+
+<plugins>
+     <plugin>
+      <information>
+          <name>${project.name}</name>
+          <author>Tony Johnson</author>
+          <version>${project.version}</version>
+          <description kind="short">Adds support for graphics input/output.</description>
+          <description>${project.description}</description>
+          <category>io</category>
+          <load-at-start/>
+      </information>
+      <resources>
+          <j2se minVersion="${javaVersion}"/>
+          <application minVersion="3.0.12"/>
+      </resources> 
+    </plugin>
+</plugins>
+

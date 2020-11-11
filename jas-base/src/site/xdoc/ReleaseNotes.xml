@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<document> 
+  <properties>
+    <title>Release Notes</title> 
+  </properties>
+
+  <body>
+    <section name="Release Notes"> 
+      
+      <subsection name="Jas 3.1.3">
+        <b>Jas 3 core:</b>
+        <ul>
+          <li>Added "Docked Frames" page manager that allows displaying pages as tabs or independent frames.</li>
+          <li>Enhancements to application framework used for developing customized applications based on Jas3.</li>
+        </ul>
+      </subsection>
+      
+      <subsection name="Jas 3.1.2">
+        <ul>
+          <li>Includes a number of enhancements to the Jas 3 API designed to provide 
+              additional functionality to the plugin developers.</li>
+        </ul>
+      </subsection>
+      
+      <subsection name="Jas 3.1.1">
+        <ul>
+          <li>Assures compatibility with recent JRE releases whose version numbers do no follow the standard scheme.
+            If the Java runtime version reported by the system through the <code>java.version</code> property is not in
+            <code>major[.minor][.incremental][-qualifier][-build]</code> format, Jas 3 will load plugins 
+            without checking java version compatibility requirements specified in their descriptors.</li>
+          <li>Improves handling of application properties.</li>
+        </ul>
+      </subsection>
+      
+      <subsection name="Jas 3.1.0">
+        <b>Jas 3 core:</b>
+        <ul>
+          <li>Addressed numerous compatibility issues caused by recent changes in Oracle JRE and Java Web Start software.</li>
+          <li>Addressed OS X compatibility issues. OS X extensions are excluded from the standard distribution,
+              but can be downloaded through the plugin manager.</li>
+          <li>JRE 1.6 is no longer supported.</li>
+          <li>Improvements in functionality accessible through the Jas 3 Help menu.</li>
+          <li>Improved reporting of exceptions thrown by external code loaded into Jas 3.</li>
+          <li>Addressed several performance issues related to interactions between threads run by Jas 3.</li>
+          <li>Miscellaneous minor fixes and improvements.</li>
+          <li>Additional documentation.</li>
+        </ul>
+        <b>Plugin Manager:</b>
+        <ul>
+          <li>Made sure that newly installed plugins are loaded correctly and their various initialization methods are called 
+            in correct order independent of the installation scenario.</li>
+          <li>Improved an ability to load plugins without restarting Jas 3.</li>
+          <li>Changes to handling of libraries found in extensions directories but not claimed by any installed plugins.
+            By default, these libraries are ignored when the application starts, but can be loaded or deleted through the 
+            plugin manager dialog. The user is warned when unclaimed libraries are detected. The default behavior can be
+            changed through the plugin manager preferences.</li>
+        </ul>
+      </subsection>
+      
+      <subsection name="Jas 3.0.10">
+        <b>Jas 3 core:</b>
+        <ul>
+          <li>Added automated restart capability.</li>
+        </ul>
+        <b>Plugin Manager:</b>
+        <ul>
+          <li>Enabled loading plugin descriptors found on the classpath.</li>
+          <li>Modified plugins update logic to simplify creating fixed and customized distributions.</li>
+          <li>Error details are now reported if the plugin manager fails to initialize.</li>
+        </ul>
+        <b>Web Start:</b>
+        <ul>
+          <li>Fixed several problems caused by recent changes in Java Web Start software and Oracle JRE.</li>
+        </ul>
+      </subsection>
+      
+      <subsection name="Jas 3.0.6">
+        <b>Jas 3 core:</b>
+        <ul>
+          <li>Improved reporting of errors in loaded user's code.</li>
+        </ul>
+        <b>Web Start:</b>
+        <ul>
+          <li>Updated for compatibility with JRE 1.7.0-51 and later.</li>
+        </ul>
+      </subsection>
+      
+      <subsection name="Jas 3.0.5">
+        <ul>
+          <li>Fix several GUI issues.</li>
+        </ul>
+      </subsection>
+
+      <subsection name="Jas 3.0.4">
+        <b>Jas 3 core:</b>
+        <ul>
+          <li>Fixed several thread safety issues that could affect performance and 
+            occasionally cause the application to stop responding.</li>
+          <li>Errors at the application initialization stage are now correctly reported.</li>
+        </ul>
+        <b>Flashing Node Plugin:</b>
+        <ul>
+          <li>Initialization bug is fixed. The plugin is now loaded at the application startup.</li>
+        </ul>
+        <b>Plugin manager:</b>
+        <ul>
+          <li>New options for handling libraries found in the application extensions directories but not referenced by any
+            installed plugins:
+            <ul>
+              <li><i>Remove.</i> Unclaimed library files are deleted on the application startup.</li>
+              <li><i>Ignore.</i> Unclaimed library files are not deleted but classes they contain remain inaccessible 
+                to the application. It is possible to load or delete these libraries later through the plugin manager.</li>
+              <li><i>Load.</i> Libraries found in extensions directories are added to the classpath whether or not they 
+                are claimed by any installed plugins. This can be convenient when developing new plugins, but it may affect 
+                application performance and result in unpredictable behavior, depending on the content of the loaded libraries.</li>
+              <li><i>Prompt</i> (default). The user is prompted every time unclaimed libraries are detected.</li>
+            </ul>
+          </li>
+          <li>
+            Missing libraries referenced by installed plugins can now be automatically downloaded.
+            If Jas 3 is configured to download the list of available plugins at the application startup,
+            missing plugins required by any of the active installed plugins can also be automatically downloaded and installed.
+          </li>
+          <li>
+            The preference page now has an option for ignoring snapshot versions of available plugins.
+          </li>
+          <li>
+            Libraries are added to the classpath on "as needed" basis. 
+            At any point in its life cycle, an active plugin can be in one of the following states:
+            <ul>
+              <li><i>Broken</i> (due to missing libraries or dependencies, or due to initialization errors). Indicated by "broken" icon.</li>
+              <li><i>Not loaded</i>. Libraries are not on the classpath. Indicated by grayed out title.</li>
+              <li><i>Not started</i>. Libraries are on the classpath, the main class is not instantiated. Indicated by "stopped" icon.</li>
+              <li><i>Started</i>. An instance of the main class has been created and initialized.</li>
+            </ul>
+            Plugins that do not specify LoadAtStart property in their descriptors can be loaded and started through
+            the plugin manager dialog.
+          </li>
+          <li>
+            Machinery for blacklisting plugins has been added. Several obsolete plugins have been blacklisted
+            and will no longer show up in list of available plugins.
+          </li>
+        </ul>
+        <b>Preferences plugin:</b>
+        <ul>
+          <li>Fixed an issue with incorrect behavior of the preferences dialog when a node that does not
+            have a preference page associated with it is selected.</li>
+        </ul>
+        <b>Compiler plugin:</b>
+        <ul>
+          <li>Fixed a bug that prevented loading classes that are not in the default package through the editor popup menu.
+            Manually loading superclasses in order to load a subclass is no longer necessary.</li>
+        </ul>
+        <b>Record loop plugin:</b>
+        <ul>
+          <li>Details of errors in client code invoked by record loop listeners are now reported, and the user
+            is given a chance to pause or stop event processing at that point.</li>
+        </ul>
+      </subsection>
+
+      <subsection name="Jas 3.0.3">
+        <b>Jas 3 core:</b>
+        <ul>
+          <li>Fixed an issue where exceptions thrown by plugins were not properly reported to the user.</li>
+        </ul>
+        <b>Plugin manager:</b>
+        <ul>
+          <li>Some non-standard but occasionally used library name and version formats 
+            (like <code><span style="white-space: nowrap;">lib.name-2.0.3.alpha.5</span></code>)
+            are now recognized and correctly processed by the plugin manager. Note that even though Jas3 can now handle these
+            formats, Maven cannot. Depending on the version of Maven you use to build a plugin,
+            you might get an error message, or you might have multiple versions of the same library included
+            in the list of dependencies. If at all possible, name the libraries according to the
+            <code><span style="white-space: nowrap;">name-major[.minor][.incremental][-qualifier][-build]</span></code> scheme.</li>
+          <li>Library recognition logic is improved - takes full advantage of maven manifests embedded 
+            in arbitrarily named jars installed into the extensions directory by means other than the plugin manager.</li>
+          <li>Fixed an issue with dynamically updating lists of available and installed plugins in the plugin
+            manager dialog.</li>
+        </ul>
+      </subsection>
+      
+      <subsection name="Jas 3.0.2">
+        <ul>
+          <li>Webstart launcher is now available.</li>
+          <li>Plugin Manager: improved handling of libraries where the version supplied by maven manifest
+            is not in a correct format.</li>
+        </ul>
+      </subsection>
+
+      <subsection name="Jas 3.0.1">
+        <ul>
+          <li>Enhancements to the project web site.</li>
+        </ul>
+      </subsection>
+
+      <subsection name="Jas 3.0.0">
+        <p>
+          The first official production release.
+        </p><p>
+          Unlike earlier versions, 3.0.0 contains only the minimal set of built-in plugins. All extensions
+          can be downloaded through the plugin manager. If you wish to install a set of plugins roughly 
+          equivalent to the default distribution of JAS 3 earlier versions, select "JAS 3 Standard Extensions" plugin.
+        </p><p>
+          Note that some of the older plugins might not work with JAS 3.0.0 since their plugin descriptors
+          (PLUGIN-inf/plugins.xml files) do not contain all required libraries. It is recommended that you wipe
+          out your JAS 3 extensions directories before updating to 3.0.0. Compatible versions of most plugins
+          maintained by the JAS 3 team have been released and are available through the plugin manager.
+        </p>
+      </subsection>
+      
+    </section>
+  </body>
+</document>

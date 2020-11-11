@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:pom="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>org.freehep</groupId>
+        <artifactId>jas-base</artifactId>
+        <version>3.1.4</version>
+    </parent>
+
+    <artifactId>jas-assembly</artifactId>
+    <packaging>pom</packaging>
+    
+    <name>JAS 3 Assembly</name>
+    <description>JAS 3 Assembly</description>
+    
+    <properties>
+        <java.memory>1024m</java.memory>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.freehep</groupId>
+            <artifactId>jas-core</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/release.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-Xmx${java.memory}</argument>
+                        <argument>-Dapplication.home=target/jas-assembly-${project.version}-distribution/jas-assembly-${project.version}</argument>
+                        <argument>-jar</argument>
+                        <argument>target/jas-assembly-${project.version}-distribution/jas-assembly-${project.version}/lib/jas-core-${project.version}.jar</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+        </plugins>        
+    </build>
+</project>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-Development Deploy</actionName>
+            <displayName>Development Deploy</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+                <goal>site</goal>
+                <goal>site:deploy</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>dev-deploy</activatedProfile>
+            </activatedProfiles>
+        </action>
+        <action>
+            <actionName>CUSTOM-Production Deploy</actionName>
+            <displayName>Production Deploy</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+                <goal>site</goal>
+                <goal>site:deploy</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>prod-deploy</activatedProfile>
+            </activatedProfiles>
+        </action>
+        
+    </actions>

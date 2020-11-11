@@ -1,0 +1,234 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.freehep</groupId>
+    <artifactId>jas-base</artifactId>
+    <version>3.1.4</version>
+  </parent>
+
+  <artifactId>jas-webstart</artifactId>
+  <packaging>pom</packaging>
+  
+  <name>Jas 3 Webstart</name>
+  <description>This project generates a webstart bundle for Jas 3.</description>
+  
+  <properties>
+    <jnlp.codebase />
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.freehep</groupId>
+      <artifactId>jas-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+<!--    <dependency>
+      <groupId>org.freehep.external</groupId>
+      <artifactId>MacOSXPlugin</artifactId>
+      <version>1.0.0</version>
+    </dependency>-->
+  </dependencies>
+    
+  <build>
+    
+    <plugins>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>copy-webstart-bundle-to-site-directory</id>
+            <phase>site</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/site</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/jnlp</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>              
+            </configuration>            
+          </execution>
+        </executions>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>webstart-maven-plugin</artifactId>
+        <version>1.0-beta-6</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>keytool-api-1.7</artifactId>
+            <version>1.4</version>
+          </dependency>
+        </dependencies>
+        
+        <executions>
+          
+<!--          <execution>
+            <id>MacOSX</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jnlp-inline</goal>
+            </goals>
+            <configuration>
+              <dependencies>
+                <includes>
+                  <include>org.freehep.external:MacOSXPlugin</include>
+                </includes>
+              </dependencies>
+              <jnlp>
+                <outputFile>test.jnlp</outputFile>
+                <inputTemplate>jas3.jnlp.vm</inputTemplate>
+                <j2seVersion>${javaVersion}+</j2seVersion>
+              </jnlp>
+            </configuration>
+          </execution>-->
+          
+          <execution>
+            <id>main</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jnlp-inline</goal>
+            </goals>
+            <configuration>
+<!--              <dependencies>
+                <excludes>
+                  <exclude>org.freehep.external:MacOSXPlugin</exclude>
+                </excludes>
+              </dependencies>-->
+              <jnlp>
+                <outputFile>jas3.jnlp</outputFile>
+                <mainClass>org.freehep.jas.JAS3</mainClass>
+                <inputTemplate>jas3.jnlp.vm</inputTemplate>
+                <j2seVersion>${javaVersion}+</j2seVersion>
+              </jnlp>
+            </configuration>
+          </execution>
+          
+        </executions>
+        
+        <configuration>
+          <outputJarVersions>false</outputJarVersions>
+          <unsignAlreadySignedJars>true</unsignAlreadySignedJars>
+          <canUnsign>true</canUnsign>
+          <libPath>lib</libPath>
+          <sign>
+            <verify>true</verify>
+            <keystore>${jar.signing.keystore.location}</keystore>
+            <keypass>${jar.signing.keypass}</keypass>
+            <storepass>${jar.signing.storepass}</storepass>
+            <alias>${jar.signing.alias}</alias>
+          </sign>
+          <updateManifestEntries> 
+            <Permissions>all-permissions</Permissions> 
+            <Codebase>*</Codebase> 
+          </updateManifestEntries> 
+        </configuration>
+      </plugin>
+      
+    </plugins>
+
+  </build>
+    
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.6</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>index</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
+  
+  <profiles>
+    
+    <!-- Profile used to deploy to production location on jas3 web site with SSH transport. -->
+    <profile>
+      <id>prod-deploy</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+  
+      <properties>
+        <jnlp.codebase>http://jas.freehep.org/jas3/jas-webstart</jnlp.codebase>
+      </properties>
+
+      <distributionManagement>
+        <site>
+          <id>srs-web-deploy</id>
+          <url>scpexe://svn.freehep.org/nfs/slac/g/jas/workspace/jas3/jas-webstart</url>
+        </site>
+      </distributionManagement>
+
+    </profile>
+    
+    
+    <!-- Profile used to deploy to testing location on jas3 web site with SSH transport. -->
+    <profile>
+      <id>dev-deploy</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      
+      <properties>
+        <jnlp.codebase>http://jas.freehep.org/jas3/jas-webstart-dev</jnlp.codebase>
+      </properties>
+
+      <distributionManagement>
+        <site>
+          <id>srs-web-deploy</id>
+          <url>scpexe://svn.freehep.org/nfs/slac/g/jas/workspace/jas3/jas-webstart-dev</url>
+        </site>
+      </distributionManagement>
+
+    </profile>
+    
+    <!-- Profile to be used by Jenkins non-release builds. -->
+<!--    <profile>
+      <id>jenkins-not-release</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>false</value>
+          <name>jenkins</name>
+          <value>true</value>
+        </property>
+      </activation>
+      
+      <properties>
+        <jnlp.codebase>http://srs.slac.stanford.edu/hudson/view/FreeHEP/job/org-freehep-jas/site/jas-webstart</jnlp.codebase>
+      </properties>
+
+    </profile>-->
+    
+    
+    <!-- Release profile. -->
+    <profile>
+      <id>release-profile</id>
+  
+      <properties>
+        <jnlp.codebase>http://jas.freehep.org/jas3/jas-webstart</jnlp.codebase>
+      </properties>
+      
+    </profile>
+    
+  </profiles>
+  
+</project>
+
+

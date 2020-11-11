@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:pom="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+  
+    <parent>
+        <groupId>org.freehep</groupId>
+        <artifactId>jas-extensions</artifactId>
+        <version>3.1.0</version>
+    </parent>
+
+    <groupId>org.freehep</groupId>
+    <artifactId>jas-standard-set</artifactId>
+    <version>1.0.6-SNAPSHOT</version>
+
+    <name>JAS 3 Standard Extensions</name>
+    <description>
+      Installs a typical set of plugins required by most users:
+         JAS 3 AIDA Plugin,
+         JAS 3 Compiler plugin,
+         JAS 3 Graphics IO,
+         JAS 3 JMinuit Fitter,
+         JAS 3 Jython Plugin,
+         JAS 3 Groovy Plugin,
+         JAS 3 Record Loop,
+         JAS 3 Root Plugin,
+         JAS 3 Simple Editor,
+         JAS 3 Tuple Explorer.
+    </description>
+
+    <repositories>
+        <repository>
+            <id>freehep-maven2-public</id>
+            <name>Maven FreeHEP</name>
+            <url>http://srs.slac.stanford.edu/nexus/content/groups/freehep-maven2-public/</url>
+        </repository>
+    </repositories>
+    
+    <pluginRepositories>
+        <pluginRepository>
+            <id>freehep-maven2-public</id>
+            <name>Maven FreeHEP</name>
+            <url>http://srs.slac.stanford.edu/nexus/content/groups/freehep-maven2-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <scm>
+        <url>svnFreehepRepo</url>
+        <connection>scm:svn:svn://svn.freehep.org/svn/jas/trunk/extensions/StandardSet</connection>
+        <developerConnection>scm:svn:svn://svn.freehep.org/svn/jas/trunk/extensions/StandardSet</developerConnection>
+    </scm>
+
+</project>
