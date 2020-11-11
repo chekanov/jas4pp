@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.2
+Created-By: 1.8.0_151-b12 (Oracle Corporation)
+Built-By: ${app.author}
+Main-Class: jhepsim.Main
+Built-Date: 2020-08-14_13:49:03
+Version: ${app.version}
+Permissions: all-permissions
+Codebase: atlaswww.hep.anl.gov
+Application-Name: HepSim analyzer
+Entry-Point: jhepsim.Main
+Class-Path: 
+
