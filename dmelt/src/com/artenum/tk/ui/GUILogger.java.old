@@ -1,0 +1,226 @@
+/**
+ * Project: ArtTK                                    <br>
+ *                                                   <br>
+ * (c) Copyright: Artenum SARL, 24 rue Louis Blanc,  <br>
+ *                75010, Paris, France 2005-2010.    <br>
+ *                http://www.artenum.com             <br>
+ *                                                   <br>
+ * License: see LICENSE.txt file                     <br>
+ *                                                   <br>
+ * @author Sebastien Jourdain                        <br>
+ */
+
+package com.artenum.tk.ui;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.Hashtable;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JTextPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+import javax.swing.text.StyledDocument;
+
+public class GUILogger extends JPanel implements ActionListener, ComponentListener, ChangeListener {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3831814701259783654L;
+	public final static String STYLE_NORMAL = "regular";
+    public final static String STYLE_ERROR = "error";
+    public final static String STYLE_WARNING = "warning";
+    public final static String STYLE_LARGE = "large";
+    public final static String STYLE_SMALL = "small";
+    public final static String STYLE_BOLD = "bold";
+    private StyledDocument document;
+    private JTextPane log;
+    private JButton clear;
+    private JScrollPane scroll;
+    private JCheckBox autoScroll;
+    private int logSize = 50000;
+    private JSlider slider;
+
+    public GUILogger() {
+        super(new BorderLayout());
+        document = new DefaultStyledDocument();
+        log = new JTextPane(document);
+        log.setEditable(false);
+        // Buffer size setting
+        slider = new JSlider(1, 5);
+        Hashtable<Integer, JLabel> tabLabel = new Hashtable<Integer, JLabel>();
+        tabLabel.put(new Integer(5), new JLabel("Inf"));
+        tabLabel.put(new Integer(1), new JLabel("Min"));
+        slider.setLabelTable(tabLabel);
+        slider.setPaintLabels(true);
+        slider.addChangeListener(this);
+        slider.setValue(5);
+
+        scroll = new JScrollPane(log);
+        clear = new JButton("Clear");
+        clear.setActionCommand("CLEAR");
+        clear.addActionListener(this);
+        autoScroll = new JCheckBox("Auto scroll", true);
+        JPanel cmdLine = new JPanel();
+        cmdLine.setLayout(new BoxLayout(cmdLine, BoxLayout.LINE_AXIS));
+        cmdLine.add(autoScroll);
+        cmdLine.add(Box.createHorizontalGlue());
+        cmdLine.add(slider);
+        cmdLine.add(Box.createHorizontalGlue());
+        cmdLine.add(clear);
+        //
+        add(scroll, BorderLayout.CENTER);
+        add(cmdLine, BorderLayout.SOUTH);
+        // 
+        log.addComponentListener(this);
+
+        // Init Style
+        Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+
+        // Normal
+        Style regular = document.addStyle(STYLE_NORMAL, def);
+        StyleConstants.setFontFamily(def, "SansSerif");
+        // Bold
+        Style s = document.addStyle(STYLE_BOLD, regular);
+        StyleConstants.setBold(s, true);
+        // Small
+        s = document.addStyle(STYLE_SMALL, regular);
+        StyleConstants.setFontSize(s, 10);
+        // Large
+        s = document.addStyle(STYLE_LARGE, regular);
+        StyleConstants.setFontSize(s, 16);
+        // Error
+        s = document.addStyle(STYLE_ERROR, regular);
+        StyleConstants.setForeground(s, Color.RED);
+        // Warning
+        s = document.addStyle(STYLE_WARNING, regular);
+        StyleConstants.setForeground(s, Color.GREEN);
+    }
+
+    public void setBufferSize(int nbCharMax) {
+        logSize = nbCharMax;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        if (command.equals("CLEAR")) {
+            try {
+                document.remove(0, document.getLength());
+            } catch (BadLocationException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+
+    public StyledDocument getStyledDocument() {
+        return document;
+    }
+
+    public PrintStream getStreamedLogged(String styleName) {
+        return new PrintStream(new LoggerOutputStream(styleName));
+    }
+
+    public void updateScrollPosition() {
+        scroll.getViewport().setViewPosition(new Point(0, log.getHeight()));
+    }
+
+    public void componentHidden(ComponentEvent e) {}
+
+    public void componentMoved(ComponentEvent e) {}
+
+    public void componentResized(ComponentEvent e) {
+        if (autoScroll.isSelected()) {
+            updateScrollPosition();
+        }
+    }
+
+    public void componentShown(ComponentEvent e) {}
+
+    public void stateChanged(ChangeEvent e) {
+        switch (slider.getValue()) {
+        case 1:
+            setBufferSize(5000);
+            break;
+        case 2:
+            setBufferSize(10000);
+            break;
+        case 3:
+            setBufferSize(50000);
+            break;
+        case 4:
+            setBufferSize(100000);
+            break;
+        case 5:
+            setBufferSize(-1);
+            break;
+        }
+    }
+
+    public class LoggerOutputStream extends OutputStream {
+        private String styleName;
+
+        public LoggerOutputStream(String styleName) {
+            this.styleName = styleName;
+        }
+
+        public void checkBufferSize() {
+            if ((logSize > 0) && ((document.getLength() - logSize) > 0)) {
+                try {
+                    document.remove(0, document.getLength() - logSize);
+                } catch (BadLocationException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+
+        public void write(int b) throws IOException {
+            try {
+                document.insertString(document.getLength(), String.valueOf((char) b), document.getStyle(styleName));
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
+
+            checkBufferSize();
+        }
+
+        public void write(byte[] b) throws IOException {
+            try {
+                document.insertString(document.getLength(), new String(b), document.getStyle(styleName));
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
+
+            checkBufferSize();
+        }
+
+        public void write(byte[] b, int off, int len) throws IOException {
+            try {
+                document.insertString(document.getLength(), new String(b, off, len), document.getStyle(styleName));
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
+
+            checkBufferSize();
+        }
+    }
+}

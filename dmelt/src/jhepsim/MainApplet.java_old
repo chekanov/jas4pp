@@ -1,0 +1,155 @@
+package jhepsim;
+
+
+import java.applet.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import com.artenum.jyconsole.*;
+
+/**
+ * Main class to load
+ * 
+ * @author sergei chekanov
+ * 
+ */
+public class MainApplet extends JApplet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTabbedPane jtab;
+	private mainGUI maingui;
+	private JyConsole jconsole;
+	private JButton button, reload;
+        private int asize = 500;
+
+
+
+	public void init() {
+
+                final String paramSize = getParameter("asize");
+                if (paramSize != null) {
+                        try {
+                                asize = Integer.parseInt(paramSize);
+                        } catch (final NumberFormatException e) {
+                        }
+                }
+
+
+
+//		setSize(asize,asize);
+		getGUI();
+//	jtab.setPreferredSize(new Dimension(this.getWidth() - 5, this
+//				.getHeight() - 40));
+//		jtab.setMinimumSize(new Dimension(this.getWidth() - 5,
+//				this.getHeight() - 40));
+		add(jtab, BorderLayout.CENTER);
+		add(button, BorderLayout.NORTH);
+		add(reload, BorderLayout.SOUTH);
+
+	}
+
+/**
+Java code to support the dynamic resizing is trivial. The applet's setSize() method must be overridden to call the validate() method. 
+**/
+/*
+public void setSize(int width, int height)
+{
+   super.setSize(width,height);
+   validate();
+}
+*/
+
+	/**
+	 * Make GUI
+	 * 
+	 * @return
+	 */
+	public void getGUI() {
+
+		jconsole = new JyConsole();
+		maingui = new mainGUI();
+
+		jtab = new JTabbedPane();
+		jtab.addTab("Shell", jconsole);
+		jtab.addTab("Editor", maingui);
+
+		button = new JButton("Run");
+		reload = new JButton("Reload");
+
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jconsole.executeCmdLine();
+				String s=maingui.getEditor().getText();
+				jconsole.runPythonCmd(s);
+				jtab.setSelectedIndex(0);
+			}
+		});
+
+		reload.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jconsole.clear();
+                                jtab.setSelectedIndex(0);
+				//maingui.getEditor().setText("");
+			}
+		});
+		return;
+	}
+
+	// -----------------------------------------------------------------------
+	public void start() {
+         //     jconsole.clear();
+               jtab.setSelectedIndex(0);
+
+	}
+
+	// -----------------------------------------------------------------------
+
+/*
+	public void stop() {
+		if (jconsole != null)
+			jconsole.clear();
+		jconsole = null;
+		maingui = null;
+		jtab = null;
+	}
+*/
+
+
+        public void stop() {}
+         public void destroy() {}
+
+/*
+
+
+	// -----------------------------------------------------------------------
+
+	public void destroy() {
+
+		if (jconsole != null)
+			jconsole.clear();
+		jconsole = null;
+		maingui = null;
+		jtab = null;
+
+	}
+
+   
+
+
+/*
+        // soft  refresh JythoShell in thread (new instance)
+        public void iniPython() {
+                Thread t = new Thread("iniPython") {
+                        public void run() {
+                jconsole = new JyShell(); 
+                jtab.repaint();
+                 };
+                };
+                t.start();
+        }
+*/
+
+}

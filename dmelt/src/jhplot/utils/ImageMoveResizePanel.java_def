@@ -1,0 +1,344 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+ 
+public class ImageMoveResizePanel extends JPanel
+{
+	protected Image img;
+	protected Rectangle selection;
+ 
+	public ImageMoveResizePanel()
+	{
+		SelectionChangeMouseListener scml=new SelectionChangeMouseListener();
+ 
+		this.addMouseListener(scml);
+		this.addMouseMotionListener(scml);
+	}
+ 
+	public void setImage(Image img)
+	{
+		this.img=img;
+		this.selection=new Rectangle(0, 0, Math.min(this.img.getWidth(null), 5), Math.min(this.img.getHeight(null), 5));
+		this.repaint();
+	}
+ 
+	public void setSelectionBounds(Rectangle rect)
+	{
+		this.selection=rect;
+		this.repaint();
+	}
+ 
+	public void paintComponent(Graphics gr)
+	{
+		Dimension size=this.getSize();
+		gr.setColor(this.getBackground());
+		gr.fillRect(0, 0, size.width, size.height);
+ 
+		if (this.img!=null && this.selection!=null)
+		{
+			gr.drawImage(this.img, this.selection.x,  this.selection.y,  this.selection.width,  this.selection.height, this);
+		}
+	}
+ 
+	public static void main(String[] args)
+	{
+		JFrame frm=new JFrame("ImageMoveResizePanel test");
+		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 
+		ImageMoveResizePanel imrp=new ImageMoveResizePanel();
+		// Here is the path to the image
+		imrp.setImage(Toolkit.getDefaultToolkit().getImage("a.jpg"));
+		imrp.setSelectionBounds(new Rectangle(0, 0, 400, 300));
+ 
+		frm.getContentPane().add(imrp, BorderLayout.CENTER);
+		frm.setBounds(0, 0, 800, 600);
+		frm.setVisible(true);
+	}
+ 
+	protected class SelectionChangeMouseListener implements MouseMotionListener, MouseListener
+	{
+		protected int frameWidth=5;
+		protected int minSize=5;
+		protected int startDragX, startDragY;
+		protected Rectangle startDragRect;
+		protected boolean resizeLeft, resizeTop, resizeRight, resizeBottom, move;
+ 
+		/**
+		 * Invoked when a mouse button is pressed on a component and then
+		 * dragged.  <code>MOUSE_DRAGGED</code> events will continue to be
+		 * delivered to the component where the drag originated until the
+		 * mouse button is released (regardless of whether the mouse position
+		 * is within the bounds of the component).
+		 * <p>
+		 * Due to platform-dependent Drag&Drop implementations,
+		 * <code>MOUSE_DRAGGED</code> events may not be delivered during a native
+		 * Drag&Drop operation.
+		 */
+		public void mouseDragged(MouseEvent e)
+		{
+			if (startDragRect!=null)
+			{
+				int x=e.getX();
+				int y=e.getY();
+ 
+				int diffX=startDragX-x;
+				int diffY=startDragY-y;
+ 
+				int newX=startDragRect.x;
+				int newY=startDragRect.y;
+				int newW=startDragRect.width;
+				int newH=startDragRect.height;
+ 
+				if (resizeLeft)
+				{
+					newX=newX-diffX;
+					newW=newW+diffX;
+				}
+				if (resizeTop)
+				{
+					newY=newY-diffY;
+					newH=newH+diffY;
+				}
+				if (resizeRight)
+				{
+					newW=newW-diffX;
+				}
+				if (resizeBottom)
+				{
+					newH=newH-diffY;
+				}
+				if (move)
+				{
+					newX=newX-diffX;
+					newY=newY-diffY;
+				}
+				if (newW>minSize && newH>minSize)
+				{
+					setSelectionBounds(new Rectangle(newX, newY, newW, newH));
+				}
+			}
+		}
+ 
+		/**
+		 * Invoked when the mouse cursor has been moved onto a component
+		 * but no buttons have been pushed.
+		 */
+		public void mouseMoved(MouseEvent e)
+		{
+			if (selection!=null)
+			{
+				int x=e.getX();
+				int y=e.getY();
+ 
+				int selX=selection.x;
+				int selY=selection.y;
+				int selW=selection.width;
+				int selH=selection.height;
+ 
+				Rectangle inside=new Rectangle(selX, selY, selW, selH);
+ 
+				Rectangle leftFrame=new Rectangle(selX, selY, frameWidth, selH);
+				Rectangle topFrame=new Rectangle(selX, selY, selW, frameWidth);
+				Rectangle rightFrame=new Rectangle(selX+selW-frameWidth, selY, frameWidth, selH);
+				Rectangle bottomFrame=new Rectangle(selX, selY+selH-frameWidth, selW, frameWidth);
+ 
+				boolean isInside=inside.contains(x, y);
+				boolean isLeft=leftFrame.contains(x, y);
+				boolean isTop=topFrame.contains(x, y);
+				boolean isRight=rightFrame.contains(x, y);
+				boolean isBottom=bottomFrame.contains(x, y);
+ 
+				if (isLeft && isTop)
+				{
+					setCursor(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
+				}
+				else if (isTop && isRight)
+				{
+					setCursor(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
+				}
+				else if (isRight && isBottom)
+				{
+					setCursor(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
+				}
+				else if (isBottom && isLeft)
+				{
+					setCursor(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
+				}
+				else if (isLeft)
+				{
+					setCursor(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
+				}
+				else if (isTop)
+				{
+					setCursor(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
+				}
+				else if (isRight)
+				{
+					setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
+				}
+				else if (isBottom)
+				{
+					setCursor(Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR));
+				}
+				else if (isInside)
+				{
+					setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+				}
+				else
+				{
+					setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				}
+			}
+			else
+			{
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+		}
+ 
+		/**
+		 * Invoked when the mouse button has been clicked (pressed
+		 * and released) on a component.
+		 */
+		public void mouseClicked(MouseEvent e)
+		{
+		}
+ 
+		/**
+		 * Invoked when a mouse button has been pressed on a component.
+		 */
+		public void mousePressed(MouseEvent e)
+		{
+			if (selection!=null)
+			{
+				int x=e.getX();
+				int y=e.getY();
+ 
+				int selX=selection.x;
+				int selY=selection.y;
+				int selW=selection.width;
+				int selH=selection.height;
+ 
+				Rectangle inside=new Rectangle(selX, selY, selW, selH);
+ 
+				Rectangle leftFrame=new Rectangle(selX, selY, frameWidth, selH);
+				Rectangle topFrame=new Rectangle(selX, selY, selW, frameWidth);
+				Rectangle rightFrame=new Rectangle(selX+selW-frameWidth, selY, frameWidth, selH);
+				Rectangle bottomFrame=new Rectangle(selX, selY+selH-frameWidth, selW, frameWidth);
+ 
+				boolean isInside=inside.contains(x, y);
+				boolean isLeft=leftFrame.contains(x, y);
+				boolean isTop=topFrame.contains(x, y);
+				boolean isRight=rightFrame.contains(x, y);
+				boolean isBottom=bottomFrame.contains(x, y);
+ 
+				if (isLeft && isTop)
+				{
+					resizeLeft=true;
+					resizeTop=true;
+					resizeRight=false;
+					resizeBottom=false;
+					move=false;
+				}
+				else if (isTop && isRight)
+				{
+					resizeLeft=false;
+					resizeTop=true;
+					resizeRight=true;
+					resizeBottom=false;
+					move=false;
+				}
+				else if (isRight && isBottom)
+				{
+					resizeLeft=false;
+					resizeTop=false;
+					resizeRight=true;
+					resizeBottom=true;
+					move=false;
+				}
+				else if (isBottom && isLeft)
+				{
+					resizeLeft=true;
+					resizeTop=false;
+					resizeRight=false;
+					resizeBottom=true;
+					move=false;
+				}
+				else if (isLeft)
+				{
+					resizeLeft=true;
+					resizeTop=false;
+					resizeRight=false;
+					resizeBottom=false;
+					move=false;
+				}
+				else if (isTop)
+				{
+					resizeLeft=false;
+					resizeTop=true;
+					resizeRight=false;
+					resizeBottom=false;
+					move=false;
+				}
+				else if (isRight)
+				{
+					resizeLeft=false;
+					resizeTop=false;
+					resizeRight=true;
+					resizeBottom=false;
+					move=false;
+				}
+				else if (isBottom)
+				{
+					resizeLeft=false;
+					resizeTop=false;
+					resizeRight=false;
+					resizeBottom=true;
+					move=false;
+				}
+				else if (isInside)
+				{
+					resizeLeft=false;
+					resizeTop=false;
+					resizeRight=false;
+					resizeBottom=false;
+					move=true;
+				}
+				else
+				{
+					resizeLeft=false;
+					resizeTop=false;
+					resizeRight=false;
+					resizeBottom=false;
+					move=false;
+				}
+ 
+				this.startDragX=x;
+				this.startDragY=y;
+				this.startDragRect=(Rectangle) selection.clone();
+			}
+		}
+ 
+		/**
+		 * Invoked when a mouse button has been released on a component.
+		 */
+		public void mouseReleased(MouseEvent e)
+		{
+		}
+ 
+		/**
+		 * Invoked when the mouse enters a component.
+		 */
+		public void mouseEntered(MouseEvent e)
+		{
+		}
+ 
+		/**
+		 * Invoked when the mouse exits a component.
+		 */
+		public void mouseExited(MouseEvent e)
+		{
+		}
+	}
+ 
+}
+

@@ -1,0 +1,577 @@
+/*
+ * (c) Copyright: Artenum SARL, 101-103 Boulevard Mac Donald,
+ *                75019, Paris, France 2005.
+ *                http://www.artenum.com
+ *
+ * License:
+ *
+ *  This program is free software; you can redistribute it
+ *  and/or modify it under the terms of the Q Public License;
+ *  either version 1 of the License.
+ *
+ *  This program is distributed in the hope that it will be
+ *  useful, but WITHOUT ANY WARRANTY; without even the implied
+ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ *  PURPOSE. See the Q Public License for more details.
+ *
+ *  You should have received a copy of the Q Public License
+ *  License along with this program;
+ *  if not, write to:
+ *    Artenum SARL, 101-103 Boulevard Mac Donald,
+ *    75019, PARIS, FRANCE, e-mail: contact@artenum.com
+ */
+package com.artenum.jyconsole;
+
+import com.artenum.jyconsole.action.DefaultClearAction;
+import com.artenum.jyconsole.action.DefaultCompletionAction;
+import com.artenum.jyconsole.action.DefaultEscapeAction;
+import com.artenum.jyconsole.action.DefaultHistoryNavigationAction;
+import com.artenum.jyconsole.action.DefaultValidationAction;
+import com.artenum.jyconsole.command.Command;
+import com.artenum.jyconsole.command.CommandRunner;
+import com.artenum.jyconsole.command.ThreadPerCommandRunner;
+import com.artenum.jyconsole.io.InteractiveCommandLine;
+import com.artenum.jyconsole.io.NotSingleThreadStream;
+import com.artenum.jyconsole.io.SingleThreadStream;
+import com.artenum.jyconsole.io.StyledDocumentOutputStream;
+import com.artenum.jyconsole.listener.FocusMouseListener;
+import com.artenum.jyconsole.python.JInteractiveInterpreter;
+import com.artenum.jyconsole.ui.MiniTextPane;
+import com.artenum.jyconsole.ui.PopupMenu;
+import com.artenum.jyconsole.ui.Prompt;
+import com.artenum.jyconsole.ui.ScrollingView;
+
+import com.artenum.util.PropertyLoader;
+
+import org.python.core.PyObject;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Event;
+import java.awt.Point;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.KeyEvent;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintStream;
+
+import java.lang.reflect.Constructor;
+
+import java.util.Hashtable;
+
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+import javax.swing.text.StyledDocument;
+
+/**
+ * <pre>
+ *  &lt;b&gt;Project ref           :&lt;/b&gt; JyConsole project
+ *  &lt;b&gt;Copyright and license :&lt;/b&gt; See relevant sections
+ *  &lt;b&gt;Status                :&lt;/b&gt; under development
+ *  &lt;b&gt;Creation              :&lt;/b&gt; 04/03/2005
+ *  &lt;b&gt;Modification          :&lt;/b&gt;
+ *
+ *  &lt;b&gt;Description  :&lt;/b&gt; Main component of JyConsole.
+ *
+ * </pre>
+ *
+ * <table cellpadding="3" cellspacing="0" border="1" width="100%">
+ * <tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+ * <td><b>Version number</b></td>
+ * <td><b>Author (name, e-mail)</b></td>
+ * <td><b>Corrections/Modifications</b></td>
+ * </tr>
+ * <tr>
+ * <td>0.1</td>
+ * <td>Sebastien Jourdain, jourdain@artenum.com</td>
+ * <td>Creation</td>
+ * </tr>
+ * <tr>
+ * <td>0.2</td>
+ * <td>Colin Crist, colincrist@hermesjms.com</td>
+ * <td>Contribution integrated by Sebastien Jourdain, jourdain@artenum.com</td>
+ * </tr>
+ * </table>
+ *
+ * @author Sebastien Jourdain
+ * @version 0.1
+ */
+public class JyConsole extends JPanel implements ComponentListener, AutoScrollable {
+    private static final long serialVersionUID = 1L;
+    public final static String HEADER = "JyConsole by Artenum, http://www.artenum.com\nType \"copyright\", \"credits\" or \"license\" for more information.\n";
+    public final static String COPYRIGHT = "\nCopyright (c) 2005, Artenum SARL \nAllRights reserved.\n\nCopyright (c) 2000, Jython Developers\nAll rights reserved.\n\nCopyright (c) 2000 BeOpen.com.All Rights Reserved.\n\nCopyright (c) 2000 The Apache Software Foundation.\nAll rights reserved.\n\nCopyright (c) 1995-2000 Corporation for National Research Initiatives.\nAll Rights Reserved.\n\nCopyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.\nAll Rights Reserved.\n";
+    public final static String LICENSE = "\nJyConsole follows the QPL License. (http://www.trolltech.com/licenses/qpl.html)\n";
+    public final static String CREDITS = "\nJyConsole is maintained by the Artenum developers (www.artenum.com).\n - Authors: Sebastien Jourdain, jourdain@artenum.com\n - Contributors: Colin Crist, colincrist@hermesjms.com\n";
+
+    //
+    public final static String PREF_FILE_PATH = "jyconsole.pref.file.path";
+    public final static String PREF_SCRIPT_DIR = "jyconsole.pref.script.dir";
+    public final static String PREF_ERROR_TXT_COLOR = "jyconsole.pref.txt.color.error";
+    public final static String PREF_NORMAL_TXT_COLOR = "jyconsole.pref.txt.color.normal";
+    public final static String PREF_WARNING_TXT_COLOR = "jyconsole.pref.txt.color.warning";
+    public final static String PREF_BG_COLOR = "jyconsole.pref.bg.color";
+    public final static String PREF_COMMAND_RUNNER = "jyconsole.pref.commandRunner.className";
+    public final static String PREF_PRINT_ERROR_STREAM = "jyconsole.pref.print.error.stream";
+    public final static String PREF_PRINT_STD_STREAM = "jyconsole.pref.print.std.stream";
+    public final static String PREF_INIT_LOADING_SCRIPT = "jyconsole.pref.loading.script";
+
+    // UI Part
+    public final static String STYLE_NORMAL = StyleContext.DEFAULT_STYLE;
+    public final static String STYLE_WARNING = "warning";
+    public final static String STYLE_ERROR = "error";
+
+    // System part
+    private String interpreterThreadName;
+    private JInteractiveInterpreter pythonInterpreter;
+    private InteractiveCommandLine cmd;
+    private HistoryManager historyManager;
+    private CommandRunner commandRunner;
+
+    // Pref
+    private Hashtable preference;
+
+    //
+    private JTextPane archiveUI;
+    private StyledDocument archiveModel;
+    private JTextPane cmdUI;
+    private StyledDocument cmdModel;
+    private Prompt prompt;
+    private JScrollPane scroll;
+    private JPanel uiContent;
+
+    //
+    private PopupMenu popup;
+    private FocusMouseListener focusGrabber;
+
+    public JyConsole() {
+        this(null, null);
+    }
+
+    public JyConsole(CommandRunner commandRunner) {
+        this(null, commandRunner);
+    }
+
+    public JyConsole(PyObject pyObj) {
+        this(pyObj, null);
+    }
+
+    public JyConsole(PyObject pyObj, CommandRunner commandRunner) {
+        // Init UI
+        super(new BorderLayout());
+        this.commandRunner = commandRunner;
+
+        uiContent = new ScrollingView(new BorderLayout());
+        archiveModel = new DefaultStyledDocument();
+        cmdModel = new DefaultStyledDocument();
+        archiveUI = new MiniTextPane(archiveModel);
+        archiveUI.setEditable(false);
+        cmdUI = new JTextPane(cmdModel);
+        prompt = new Prompt(cmdUI);
+        JPanel cmdLineUI = new JPanel(new BorderLayout());
+        cmdLineUI.add(prompt, BorderLayout.WEST);
+        cmdLineUI.add(cmdUI, BorderLayout.CENTER);
+        uiContent.add(archiveUI, BorderLayout.NORTH);
+        uiContent.add(cmdLineUI, BorderLayout.CENTER);
+        uiContent.addComponentListener(this);
+        // Init Style
+        Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+        Style regular = archiveUI.addStyle(STYLE_NORMAL, def);
+        cmdUI.addStyle(STYLE_NORMAL, def);
+        // StyleConstants.setFontFamily(def, "SansSerif");
+        Style s = archiveUI.addStyle(STYLE_WARNING, regular);
+        s = cmdUI.addStyle(STYLE_WARNING, regular);
+        s = archiveUI.addStyle(STYLE_ERROR, regular);
+        s = cmdUI.addStyle(STYLE_ERROR, regular);
+        // add ui in panel
+        scroll = new JScrollPane(uiContent);
+        add(scroll, BorderLayout.CENTER);
+        // Init pref
+        preference = new Hashtable();
+        if (System.getProperty(PREF_SCRIPT_DIR) != null) {
+            preference.put(PREF_SCRIPT_DIR, System.getProperty(PREF_SCRIPT_DIR));
+        } else {
+            preference.put(PREF_SCRIPT_DIR, new File(".").getAbsolutePath());
+        }
+
+        if (System.getProperty(PREF_ERROR_TXT_COLOR) != null) {
+            preference.put(PREF_ERROR_TXT_COLOR, Color.decode(System.getProperty(PREF_ERROR_TXT_COLOR)));
+        } else {
+            preference.put(PREF_ERROR_TXT_COLOR, Color.RED);
+        }
+
+        if (System.getProperty(PREF_WARNING_TXT_COLOR) != null) {
+            preference.put(PREF_WARNING_TXT_COLOR, Color.decode(System.getProperty(PREF_WARNING_TXT_COLOR)));
+        } else {
+            preference.put(PREF_WARNING_TXT_COLOR, Color.GREEN);
+        }
+
+        if (System.getProperty(PREF_NORMAL_TXT_COLOR) != null) {
+            preference.put(PREF_NORMAL_TXT_COLOR, Color.decode(System.getProperty(PREF_NORMAL_TXT_COLOR)));
+        } else {
+            preference.put(PREF_NORMAL_TXT_COLOR, Color.BLACK);
+        }
+
+        if (System.getProperty(PREF_BG_COLOR) != null) {
+            preference.put(PREF_BG_COLOR, Color.decode(System.getProperty(PREF_BG_COLOR)));
+        } else {
+            preference.put(PREF_BG_COLOR, Color.WHITE);
+        }
+
+        if (System.getProperty(PREF_FILE_PATH) != null) {
+            preference.put(PREF_FILE_PATH, System.getProperty(PREF_FILE_PATH));
+            try {
+                FileInputStream fis = new FileInputStream((String) System.getProperty(PREF_FILE_PATH));
+                try {
+                    ObjectInputStream ois = new ObjectInputStream(fis);
+                    Hashtable pref = (Hashtable) ois.readObject();
+                    ois.close();
+                    //
+                    preference.putAll(pref);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+            } catch (FileNotFoundException e) {
+                try {
+                    FileOutputStream fos = new FileOutputStream((String) System.getProperty(PREF_FILE_PATH));
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                    oos.writeObject(preference);
+                    oos.close();
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+        } else {
+            preference.put(PREF_FILE_PATH, "./pref.data");
+        }
+
+        // Init System
+        cmd = new InteractiveCommandLine(cmdModel, cmdUI, prompt, STYLE_NORMAL);
+        interpreterThreadName = new String("JyConsole-" + System.currentTimeMillis());
+
+        if (commandRunner == null) {
+            if (System.getProperty(PREF_COMMAND_RUNNER) != null) {
+                try {
+                    Constructor contructor = Class.forName(System.getProperty(PREF_COMMAND_RUNNER)).getConstructor(new Class[] { String.class });
+                    this.commandRunner = (CommandRunner) contructor.newInstance(new Object[] { interpreterThreadName });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (commandRunner == null) {
+                this.commandRunner = new ThreadPerCommandRunner(interpreterThreadName);
+            }
+        }
+
+        pythonInterpreter = new JInteractiveInterpreter(false);
+        if (pyObj != null) {
+            pythonInterpreter.setLocals(pyObj);
+        }
+
+        pythonInterpreter.addOut(new SingleThreadStream(new StyledDocumentOutputStream(archiveModel, JyConsole.STYLE_NORMAL), interpreterThreadName));
+        pythonInterpreter.addErr(new SingleThreadStream(new StyledDocumentOutputStream(archiveModel, JyConsole.STYLE_ERROR), interpreterThreadName));
+        //
+        if ((System.getProperty(PREF_PRINT_STD_STREAM) != null) && System.getProperty(PREF_PRINT_STD_STREAM).equals("true")) {
+            System.setOut(new PrintStream(new StyledDocumentOutputStream(archiveModel, JyConsole.STYLE_NORMAL)));
+        }
+
+        if ((System.getProperty(PREF_PRINT_ERROR_STREAM) != null) && System.getProperty(PREF_PRINT_ERROR_STREAM).equals("true")) {
+            System.setErr(new PrintStream(new NotSingleThreadStream(new StyledDocumentOutputStream(archiveModel, JyConsole.STYLE_ERROR), "completion")));
+        }
+
+        //
+        historyManager = new HistoryManager(this);
+        // Init command actions
+        InputMap inputMap = cmdUI.getInputMap();
+        ActionMap actionMap = cmdUI.getActionMap();
+
+        // Register default input
+        inputMap.put(KeyStroke.getKeyStroke(10, 0), "EXECUTE_COMMAND");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "ESCAPE_COMMAND");
+        inputMap.put(KeyStroke.getKeyStroke(38, 0), "UP_COMMAND");
+        inputMap.put(KeyStroke.getKeyStroke(40, 0), "DOWN_COMMAND");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, Event.CTRL_MASK), "COMPLETION_COMMAND");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_L, Event.CTRL_MASK), "CLEAR_COMMAND");
+        // Register default action
+        actionMap.put("EXECUTE_COMMAND", new DefaultValidationAction(this));
+        actionMap.put("ESCAPE_COMMAND", new DefaultEscapeAction(this));
+        actionMap.put("UP_COMMAND", new DefaultHistoryNavigationAction(this, DefaultHistoryNavigationAction.UP));
+        actionMap.put("DOWN_COMMAND", new DefaultHistoryNavigationAction(this, DefaultHistoryNavigationAction.DOWN));
+        actionMap.put("COMPLETION_COMMAND", new DefaultCompletionAction(this));
+        actionMap.put("CLEAR_COMMAND", new DefaultClearAction(this));
+        // Apply pref
+        applyPreferences();
+        // Popup
+        popup = new PopupMenu(this);
+        cmdUI.addMouseListener(popup);
+        archiveUI.addMouseListener(popup);
+        prompt.addMouseListener(popup);
+        // Focus
+        focusGrabber = new FocusMouseListener(cmdUI, this);
+        prompt.addMouseListener(focusGrabber);
+        archiveUI.addMouseListener(focusGrabber);
+        // Import default module in Python
+        clear();
+
+        if (System.getProperty(PREF_INIT_LOADING_SCRIPT) != null) {
+            File scriptToLoad = new File(System.getProperty(PREF_INIT_LOADING_SCRIPT));
+            if (scriptToLoad.exists()) {
+                executePythonFile(scriptToLoad);
+            }
+        }
+    }
+
+    public void setCommandRunner(CommandRunner commandRunner) {
+        if (this.commandRunner != null) {
+            this.commandRunner.stop();
+        }
+
+        this.commandRunner = commandRunner;
+    }
+
+    public String getInterpreterThreadName() {
+        return interpreterThreadName;
+    }
+
+    public static void main(String[] args) {
+        try {
+            if (args.length > 0) {
+                PropertyLoader.loadProperties(args[0]);
+            } else {
+                PropertyLoader.loadProperties("./jyconsole.properties");
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        JyConsole console = new JyConsole();
+
+        // DefaultKeyBinding.applyDefaultMapping(console);
+        JFrame f = new JFrame("JyConsole by Artenum");
+
+        // f.setIconImage(new
+        // ImageIcon(JyConsole.class.getResource("logo.gif")).getImage());
+        f.getContentPane().add(console, BorderLayout.CENTER);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setSize(600, 400);
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
+    }
+
+    public void applyPreferences() {
+        setColor((Color) preference.get(PREF_NORMAL_TXT_COLOR), (Color) preference.get(PREF_BG_COLOR));
+        setColorToStyle(STYLE_ERROR, (Color) preference.get(PREF_ERROR_TXT_COLOR));
+        setColorToStyle(STYLE_WARNING, (Color) preference.get(PREF_WARNING_TXT_COLOR));
+    }
+
+    public void savePreferences() {
+        try {
+            FileOutputStream fos = new FileOutputStream((String) preference.get(PREF_FILE_PATH));
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(preference);
+            oos.close();
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public Hashtable getPreferences() {
+        return preference;
+    }
+
+    public Point getCompletionWindowLocation() {
+        Point p = getInteractiveCommandLine().getCaretPositionPoint();
+        Component current = (Component) cmdUI;
+        Point p2;
+        current = current.getParent();
+        while (current != null) {
+            p2 = current.getLocation();
+            p.translate(p2.x, p2.y);
+            current = current.getParent();
+        }
+
+        p.x += prompt.getWidth();
+        // translateVerticaly if not enought space
+        // if ((p.y + cmdUI.getHeight()) >
+        // Toolkit.getDefaultToolkit().getScreenSize().getHeight()) {
+        // p.y = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight()
+        // - cmdUI.getHeight());
+        // }
+        return p;
+    }
+
+    public InteractiveCommandLine getInteractiveCommandLine() {
+        return cmd;
+    }
+
+    public void showPreviousCmdInHistory() {
+        historyManager.showPreviousCommand();
+        prompt.updateLineView();
+    }
+
+    public void showNextCmdInHistory() {
+        historyManager.showNextCommand();
+        prompt.updateLineView();
+    }
+
+    public void executeCmdLine() {
+        cmdUI.setCaretPosition(0);
+        try {
+            String cmdLine = getInteractiveCommandLine().getCmdLine();
+            historyManager.addCommandInHistory(cmdLine);
+            archiveModel.insertString(archiveModel.getLength(), ">>> " + cmdLine.replaceAll("\n", "\n... ") + "\n", archiveModel.getStyle(STYLE_NORMAL));
+            runPythonCmd(cmdLine);
+            getInteractiveCommandLine().reset();
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+
+        prompt.updateLineView();
+    }
+
+    public void executePythonFile(final File pyFile) {
+        commandRunner.invokeLater(new Command(pythonInterpreter, pyFile));
+    }
+
+    private void runPythonCmd(final String cmd) {
+        commandRunner.invokeLater(new Command(pythonInterpreter, cmd));
+    }
+
+    public void killCurrentThread() {
+        commandRunner.reset();
+    }
+
+    public void clear() {
+        try {
+            cmdModel.remove(0, cmdModel.getLength());
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            archiveModel.remove(0, archiveModel.getLength());
+            archiveModel.insertString(0, HEADER, archiveModel.getStyle(STYLE_NORMAL));
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void copyright() {
+        try {
+            String cmdLine = getInteractiveCommandLine().getCmdLine();
+            historyManager.addCommandInHistory(cmdLine);
+            archiveModel.insertString(archiveModel.getLength(), ">>> " + cmdLine.replaceAll("\n", "\n... ") + "\n", archiveModel.getStyle(STYLE_NORMAL));
+            cmdModel.remove(0, cmdModel.getLength());
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            archiveModel.insertString(archiveModel.getLength(), COPYRIGHT, archiveModel.getStyle(STYLE_NORMAL));
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void credits() {
+        try {
+            String cmdLine = getInteractiveCommandLine().getCmdLine();
+            historyManager.addCommandInHistory(cmdLine);
+            archiveModel.insertString(archiveModel.getLength(), ">>> " + cmdLine.replaceAll("\n", "\n... ") + "\n", archiveModel.getStyle(STYLE_NORMAL));
+            cmdModel.remove(0, cmdModel.getLength());
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            archiveModel.insertString(archiveModel.getLength(), CREDITS, archiveModel.getStyle(STYLE_NORMAL));
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void license() {
+        try {
+            String cmdLine = getInteractiveCommandLine().getCmdLine();
+            historyManager.addCommandInHistory(cmdLine);
+            archiveModel.insertString(archiveModel.getLength(), ">>> " + cmdLine.replaceAll("\n", "\n... ") + "\n", archiveModel.getStyle(STYLE_NORMAL));
+            cmdModel.remove(0, cmdModel.getLength());
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            archiveModel.insertString(archiveModel.getLength(), LICENSE, archiveModel.getStyle(STYLE_NORMAL));
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public JInteractiveInterpreter getPythonInterpreter() {
+        return pythonInterpreter;
+    }
+
+    // Color management
+    public void setColor(Color fg, Color bg) {
+        prompt.setColor(fg, bg);
+        cmdUI.setBackground(bg);
+        archiveUI.setBackground(bg);
+        setColorToStyle(STYLE_NORMAL, fg);
+    }
+
+    public void setColorToStyle(String styleName, Color fg) {
+        StyleConstants.setForeground(archiveModel.getStyle(styleName), fg);
+        StyleConstants.setForeground(cmdModel.getStyle(styleName), fg);
+    }
+
+    public void setBoldToStyle(String styleName, boolean bold) {
+        StyleConstants.setBold(archiveModel.getStyle(styleName), bold);
+        StyleConstants.setBold(cmdModel.getStyle(styleName), bold);
+    }
+
+    public void setItalicToStyle(String styleName, boolean italic) {
+        StyleConstants.setItalic(archiveModel.getStyle(styleName), italic);
+        StyleConstants.setItalic(cmdModel.getStyle(styleName), italic);
+    }
+
+    // Auto scroll
+    public void updateScrollPosition() {
+        scroll.getViewport().setViewPosition(new Point(0, uiContent.getHeight() - (int) scroll.getViewport().getExtentSize().height));
+        scroll.repaint();
+    }
+
+    public void componentResized(ComponentEvent e) {
+        updateScrollPosition();
+    }
+
+    public void componentHidden(ComponentEvent e) {}
+
+    public void componentMoved(ComponentEvent e) {}
+
+    public void componentShown(ComponentEvent e) {}
+}
