@@ -1,0 +1,26 @@
+Aug, 2019:
+
+   Change conditions/src/main/java/org/lcsim/conditions/ConditionsReader.java:
+          detector-framework/src/main/java/org/lcsim/geometry/util/DetectorLocator.java
+       to https for atlaswww
+
+June, 2017:
+   Protection in drawPolyhedron 
+   event-heprep/src/main/java/org/lcsim/util/heprep/DisplayHitModules.java
+
+May, 2017. Added fast math to acos for
+    ./src/main/java/org/lcsim/detector/solids/GeomOp3D.java
+
+See some protection for sensors:
+ - ./event-model/src/main/java/org/lcsim/event/base/BaseHit.java
+ - ./lcsim/event-heprep/src/main/java/org/lcsim/util/heprep/RawTrackerHitConverter.java
+
+# Redirect WWW for geometry for alaswww (for Jas4pp)  
+ -  See: org/lcsim/geometry/util/DetectorLocator.java
+  -       org/lcsim/conditions/ConditionsReader.java
+           Line 88, 198,
+	   # Hard coded URL to resolve geometry
+	   # Move to: http://atlaswww.hep.anl.gov/hepsim/soft/detectors/
+
+
+## S.Chekanov

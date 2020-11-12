@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>lcsim-tracking</artifactId>
+  <name>tracking</name>
+  <description>tracking including digitization package sisim and track finding with seedtracker</description>
+
+  <parent>
+    <groupId>org.lcsim</groupId>
+    <artifactId>lcsim</artifactId>
+    <version>4.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.lcsim</groupId>
+      <artifactId>lcsim-detector-framework</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.lcsim</groupId>
+      <artifactId>lcsim-event-processing</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.lcsim</groupId>
+      <artifactId>lcsim-aida</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-math</artifactId>
+      <version>2.2</version>
+    </dependency>
+  </dependencies>
+
+</project>
