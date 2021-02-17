@@ -1,0 +1,8 @@
+# Remove non-functional freehep-rootio-*jar for Java 1.8
+# and replace it with JDK.15 compiled
+rm -f ../OUTPUT/lib/freehep/freehep-rootio-*jar
+rm -f ../OUTPUT/lib/misc/root4jas.jar
+
+ant
+
+cp -f root4jas.jar ../OUTPUT/lib/misc/

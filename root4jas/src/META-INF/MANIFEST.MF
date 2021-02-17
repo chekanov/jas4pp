@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.2
+Created-By: 1.8.0_151-b12 (Oracle Corporation)
+Built-By: RootIO for Jas4pp 
+Main-Class: rootio.Main
+Class-Path: 
+
